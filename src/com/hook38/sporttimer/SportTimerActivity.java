@@ -3,6 +3,7 @@ package com.hook38.sporttimer;
 import com.hook38.sporttimer.controller.Controller;
 import com.hook38.sporttimer.controller.TimerController;
 import com.hook38.sporttimer.view.ClockView;
+import com.hook38.sporttimer.view.ListView;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +20,7 @@ public class SportTimerActivity extends FragmentActivity implements OnClickListe
 	private Button startButton;
 	private Button resetButton;
 	private Button pauseButton;
+	private Button addButton;
 	
 	private Status status = Status.STOPPED;
 	
@@ -27,15 +29,19 @@ public class SportTimerActivity extends FragmentActivity implements OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        ClockView fragment = 
+        ClockView clockview_fragment = 
         		(ClockView) getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
-        controller = new TimerController(fragment);
+        ListView listview_fragment = 
+        		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
+        controller = new TimerController(clockview_fragment, listview_fragment);
         startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         pauseButton = (Button)findViewById(R.id.pause_button);
         pauseButton.setOnClickListener(this);
         resetButton = (Button)findViewById(R.id.reset_button);
         resetButton.setOnClickListener(this);
+        addButton = (Button)findViewById(R.id.add_button);
+        addButton.setOnClickListener(this);
     }
     
 	public void onClick(View view) {
@@ -51,6 +57,7 @@ public class SportTimerActivity extends FragmentActivity implements OnClickListe
 				break;
 			case STARTED:				
 				break;
+			
 			}
 			status = Status.STARTED;
 			break;
@@ -65,6 +72,17 @@ public class SportTimerActivity extends FragmentActivity implements OnClickListe
 				break;
 			}
 			status = Status.PAUSED;
+			break;
+		case R.id.add_button:
+			switch(status){
+			case STOPPED:
+				break;
+			case PAUSED:
+				break;
+			case STARTED:	
+				controller.add();
+				break;
+			}
 			break;
 		case R.id.reset_button:			
 			controller.reset();

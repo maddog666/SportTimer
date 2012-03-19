@@ -6,7 +6,7 @@
 
 	<fragment android:name="com.hook38.sporttimer.view.ClockView"
     	android:id="@+id/clock_fragment"
-    	android:layout_weight="1"
+    	android:layout_weight="3"
     	android:layout_height="0sp"
     	android:layout_width="fill_parent"/>
 	<LinearLayout 
@@ -26,6 +26,12 @@
 		        android:layout_height="fill_parent"
 		        android:layout_weight="1"
 		        android:text="Pause" />	
+		    <Button
+		        android:id="@+id/add_button"
+		        android:layout_width="0sp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="Add Lap" />	
 	        <Button
 		        android:id="@+id/reset_button"
 		        android:layout_width="0sp"
@@ -33,4 +39,9 @@
 		        android:layout_weight="1"
 		        android:text="Reset" />		    
 	</LinearLayout>
+	<fragment android:name="com.hook38.sporttimer.view.ListView"
+	    android:id="@+id/listview_fragment"
+	    android:layout_weight="5"
+	    android:layout_height="0dp"
+	    android:layout_width="fill_parent" />
 </LinearLayout>

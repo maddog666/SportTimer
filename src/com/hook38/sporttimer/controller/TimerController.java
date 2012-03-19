@@ -3,6 +3,7 @@ package com.hook38.sporttimer.controller;
 import android.os.Handler;
 
 import com.hook38.sporttimer.view.ClockView;
+import com.hook38.sporttimer.view.ListView;
 
 public class TimerController extends Controller {
 	//time which timer start
@@ -13,9 +14,14 @@ public class TimerController extends Controller {
 	private long pausedTime;
 	private Handler handler = new Handler();
 	
-	public TimerController(ClockView clockView) {
-		super(clockView);
+	public TimerController(ClockView clockView, ListView listview) {
+		super(clockView, listview);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void add() {
+		String time = getTimeString();
+		listView.addItem(time);
 	}
 	
 	public void start() {
@@ -38,14 +44,13 @@ public class TimerController extends Controller {
 		handler.removeCallbacks(Timer);
 		pausedTime = 0;
 		setTime(0, 0, 0);
+		listView.clearItems();
 	}
 	
 	private Runnable Timer = new Runnable() {
-		//private Handler handler = new Handler();
-		
+		//private Handler handler = new Handler();		
 		public void run() {
-			long spentTime = System.currentTimeMillis() - startTime - pausedTime;
-			
+			long spentTime = System.currentTimeMillis() - startTime - pausedTime;			
 			long mins = spentTime/(1000 * 60);
 			long secs = (spentTime/1000) % 60;
 			long centisecs = (spentTime/10) % 100;
