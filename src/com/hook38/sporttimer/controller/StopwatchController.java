@@ -14,6 +14,12 @@ public class StopwatchController extends Controller {
 	private long pausedTime;
 	private Handler handler = new Handler();
 	
+	public void destroy() {
+		if(handler != null) {
+			handler.removeCallbacks(Timer);
+		}
+	}
+	
 	public StopwatchController(ClockView clockView, ListView listview) {
 		super(clockView, listview);
 		// TODO Auto-generated constructor stub

@@ -33,4 +33,6 @@ public abstract class Controller {
 		rightTimeString = String.valueOf(right);
 		this.setTime(leftTimeString, midTimeString, rightTimeString);
 	}
+	
+	public abstract void destroy();
 }
