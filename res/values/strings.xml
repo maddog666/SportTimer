@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, SportTimerActivity!</string>
     <string name="app_name">SportTimer</string>
-
+	<string name="settings_label">Setting</string>
+	<string name="stopwatch_label">StopWatch</string>
+	<string name="timer_label">Timer</string>
+	<string name="exit_label">Exit</string>
 </resources>

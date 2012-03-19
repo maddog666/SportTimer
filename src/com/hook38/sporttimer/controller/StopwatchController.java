@@ -5,7 +5,7 @@ import android.os.Handler;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
-public class TimerController extends Controller {
+public class StopwatchController extends Controller {
 	//time which timer start
 	private long startTime;
 	//time which timer paused
@@ -14,7 +14,7 @@ public class TimerController extends Controller {
 	private long pausedTime;
 	private Handler handler = new Handler();
 	
-	public TimerController(ClockView clockView, ListView listview) {
+	public StopwatchController(ClockView clockView, ListView listview) {
 		super(clockView, listview);
 		// TODO Auto-generated constructor stub
 	}
