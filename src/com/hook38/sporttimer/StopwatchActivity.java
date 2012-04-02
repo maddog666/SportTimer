@@ -4,6 +4,9 @@ import com.hook38.sporttimer.controller.StopwatchController;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -36,7 +39,8 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
         		(ClockView) getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
         ListView listview_fragment = 
         		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
-        controller = new StopwatchController(clockview_fragment, listview_fragment);
+        
+        controller = new StopwatchController(getBaseContext(), clockview_fragment, listview_fragment);
         startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         pauseButton = (Button)findViewById(R.id.pause_button);
@@ -63,7 +67,7 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
     	case R.id.stopwatch:
     		break;
     	case R.id.timer:
-    		startActivity(new Intent(this, TimerActivity.class));
+    		startActivity(new Intent(this, CountDownTimerActivity.class));
     		return true;    		
     	case R.id.exit:
     		finish();

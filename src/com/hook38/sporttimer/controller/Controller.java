@@ -1,14 +1,18 @@
 package com.hook38.sporttimer.controller;
 
+import android.content.Context;
+
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
 public abstract class Controller {
 	protected ClockView clockView;
+	protected Context context;
 	protected ListView listView;
 	private String leftTimeString;
 	private String midTimeString;
 	private String rightTimeString;
+	protected Runnable Timer;
 	
 	public String getTimeString() {
 		return leftTimeString + ":" 
@@ -16,8 +20,9 @@ public abstract class Controller {
 				+ rightTimeString;
 	}
 	
-	public Controller(ClockView clockView, ListView listView) {
+	public Controller(Context context, ClockView clockView, ListView listView) {
 		this.clockView = clockView;
+		this.context = context;
 		this.listView = listView;
 	}
 	

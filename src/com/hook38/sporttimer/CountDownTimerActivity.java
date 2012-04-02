@@ -1,6 +1,7 @@
 package com.hook38.sporttimer;
 
 import com.hook38.sporttimer.controller.Controller;
+import com.hook38.sporttimer.controller.CountdownTimerController;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
@@ -14,7 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class TimerActivity extends FragmentActivity implements OnClickListener {
+public class CountDownTimerActivity extends FragmentActivity implements OnClickListener {
 
 	Controller controller;
 	Button startButton;
@@ -25,13 +26,13 @@ public class TimerActivity extends FragmentActivity implements OnClickListener {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.timer);
+        setContentView(R.layout.countdowntimer);
         
         ClockView clockview_fragment = 
         		(ClockView) getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
         ListView listview_fragment = 
         		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
-        //controller = new StopwatchController(clockview_fragment, listview_fragment);
+        controller = new CountdownTimerController(getBaseContext(), clockview_fragment, listview_fragment);
         startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         pauseButton = (Button)findViewById(R.id.pause_button);
