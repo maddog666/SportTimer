@@ -12,7 +12,7 @@ import com.hook38.sporttimer.utils.countdowntimer.RoutineList;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
-public class CountdownTimerController extends Controller {
+public class CountdownTimerController extends ActivityController {
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
 	private Handler handler = new Handler(); 

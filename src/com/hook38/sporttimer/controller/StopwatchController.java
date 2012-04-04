@@ -1,12 +1,11 @@
 package com.hook38.sporttimer.controller;
-
 import android.content.Context;
 import android.os.Handler;
 
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
-public class StopwatchController extends Controller {
+public class StopwatchController extends ActivityController {
 	//time which timer start
 	private long startTime;
 	//time which timer paused
@@ -14,6 +13,8 @@ public class StopwatchController extends Controller {
 	//total summed paused time (paused time - restart time)
 	private long pausedTime;
 	private Handler handler = new Handler();
+
+	
 	
 	public void destroy() {
 		if(handler != null) {
@@ -28,7 +29,7 @@ public class StopwatchController extends Controller {
 	
 	public void add() {
 		String time = getTimeString();
-		listView.addItem(time);
+		this.addItem(time);
 	}
 	
 	public void start() {
@@ -51,8 +52,10 @@ public class StopwatchController extends Controller {
 		handler.removeCallbacks(Timer);
 		pausedTime = 0;
 		setTime(0, 0, 0);
-		listView.clearItems();
+		this.clearItems();
 	}
+	
+	
 	
 	private Runnable Timer = new Runnable() {
 		//private Handler handler = new Handler();		

@@ -1,6 +1,6 @@
 package com.hook38.sporttimer;
 
-import com.hook38.sporttimer.controller.Controller;
+import com.hook38.sporttimer.controller.ActivityController;
 import com.hook38.sporttimer.controller.CountdownTimerController;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
@@ -15,9 +15,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * This is the main activity class for the countdown clock,
+ * The purpose of this app is to beep at the end of a count down
+ * user should be able to program a set of routine prior to 
+ * the countdown.
+ * @author williamhu
+ *
+ */
 public class CountDownTimerActivity extends FragmentActivity implements OnClickListener {
 
-	Controller controller;
+	ActivityController controller;
 	Button startButton;
 	Button pauseButton;
 	Button restartButton;

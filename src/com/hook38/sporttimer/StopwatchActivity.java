@@ -17,6 +17,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * This is the main class for a stopwatch, just like any sport watch, 
+ * it can start and pause, and can also record a set of current time.
+ * @author williamhu
+ *
+ */
 public class StopwatchActivity extends FragmentActivity implements OnClickListener {
 	private enum Status {STOPPED, 
 						PAUSED, 
