@@ -1,7 +1,5 @@
 package com.hook38.sporttimer.utils.countdowntimer;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Set;
 

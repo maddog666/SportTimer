@@ -64,9 +64,13 @@ public class CountDownTimerActivity extends FragmentActivity implements OnClickL
     	switch(item.getItemId()) {
     	case R.id.stopwatch:
     		startActivity(new Intent(this, StopwatchActivity.class));
+    		finish();
     		return true;
     	case R.id.timer:    		
     		break;
+    	case R.id.setting:
+    		startActivity(new Intent(this, SettingActivity.class));
+    		return true;  
     	case R.id.exit:
     		finish();
     		return true;

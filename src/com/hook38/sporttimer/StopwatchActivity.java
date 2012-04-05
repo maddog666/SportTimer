@@ -4,9 +4,6 @@ import com.hook38.sporttimer.controller.StopwatchController;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -74,7 +71,11 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
     		break;
     	case R.id.timer:
     		startActivity(new Intent(this, CountDownTimerActivity.class));
-    		return true;    		
+    		finish();
+    		return true;
+    	case R.id.setting:
+    		startActivity(new Intent(this, SettingActivity.class));
+    		return true;  
     	case R.id.exit:
     		finish();
     		return true;

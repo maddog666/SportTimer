@@ -4,6 +4,8 @@
 	      android:title="@string/stopwatch_label" />
 	<item android:id="@+id/timer"
 	      android:title="@string/timer_label" />
+	<item android:id="@+id/setting"
+	      android:title="@string/setting_label" />
 	<item android:id="@+id/exit"
 	      android:title="@string/exit_label" />
 </menu>

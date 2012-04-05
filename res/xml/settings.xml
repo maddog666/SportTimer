@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="repeat"
+        android:title="@string/countdown_repeat"
+        android:summary="@string/countdown_repeat_summary"
+        android:defaultValue="false"/>
+</PreferenceScreen>

@@ -6,5 +6,8 @@
 	<string name="settings_label">Setting</string>
 	<string name="stopwatch_label">StopWatch</string>
 	<string name="timer_label">Timer</string>
+	<string name="setting_label">Setting</string>
 	<string name="exit_label">Exit</string>
+	<string name="countdown_repeat">Countdown Timer Repeat</string>
+	<string name="countdown_repeat_summary">Countdown Timer Repeat</string>
 </resources>

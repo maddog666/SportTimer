@@ -1,7 +1,7 @@
 package com.hook38.sporttimer.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ public class CountdownTimerController extends ActivityController {
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
 	private Handler handler = new Handler(); 
-	private ArrayList<Float> list = new ArrayList<Float>();
+	private List<Float> list = new ArrayList<Float>();
 	
 	public CountdownTimerController(Context context, ClockView clockView, ListView listView) {
 		super(context, clockView, listView);
