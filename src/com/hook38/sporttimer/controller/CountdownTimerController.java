@@ -11,16 +11,20 @@ import android.util.Log;
 import com.hook38.sporttimer.utils.countdowntimer.RoutineList;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
+import com.hook38.sporttimer.view.TimeInputView;
 
 public class CountdownTimerController extends ActivityController {
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
 	private Handler handler = new Handler(); 
 	private List<Float> list = new ArrayList<Float>();
+	private TimeInputView timeinputview;
 	
-	public CountdownTimerController(Context context, ClockView clockView, ListView listView) {
+	public CountdownTimerController(Context context, ClockView clockView, ListView listView, 
+			TimeInputView timeinput) {
 		super(context, clockView, listView);
 		// TODO Auto-generated constructor stub
+		this.timeinputview = timeinput;
 	}
 
 	@Override
@@ -49,4 +53,28 @@ public class CountdownTimerController extends ActivityController {
 			handler.postDelayed(this, 10);
 		}
 	};
+	
+	/**
+	 * Retrieve hour from the input field in timeinputview
+	 * @return hour inputed
+	 */
+	public String getInputHour() {
+		return this.timeinputview.getHour();
+	}
+	
+	/**
+	 * Retrieve minute from the input field in timeinputview
+	 * @return minute inputed
+	 */
+	public String getInputMinute() {
+		return this.timeinputview.getMinute();
+	}
+	
+	/**
+	 * Retrieve second from the input field in timeinputview
+	 * @return second inputed
+	 */
+	public String getInputSecond() {
+		return this.timeinputview.getSecond();
+	}
 }
