@@ -21,9 +21,7 @@ import android.widget.Button;
  *
  */
 public class StopwatchActivity extends FragmentActivity implements OnClickListener {
-	private enum Status {STOPPED, 
-						PAUSED, 
-						STARTED};
+	
 						
 	private StopwatchController controller;
 	private Button startButton;
@@ -31,7 +29,7 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
 	private Button pauseButton;
 	private Button addButton;
 	private Menu menu;
-	private Status status = Status.STOPPED;
+	
 	
     /** Called when the activity is first created. */
     @Override
@@ -87,45 +85,16 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
 		// TODO Auto-generated method stub
 		switch (view.getId()) {
 		case R.id.start_button:
-			switch(status){
-			case STOPPED:
-				controller.start();								
-				break;
-			case PAUSED:				
-				controller.restart();				
-				break;
-			case STARTED:				
-				break;
-			
-			}
-			status = Status.STARTED;
+			controller.startButtonClicked();
 			break;
 		case R.id.pause_button:
-			switch(status){
-			case STOPPED:
-				break;
-			case PAUSED:
-				break;
-			case STARTED:				
-				controller.pause();				
-				break;
-			}
-			status = Status.PAUSED;
+			controller.pauseButtonClicked();
 			break;
 		case R.id.add_button:
-			switch(status){
-			case STOPPED:
-				break;
-			case PAUSED:
-				break;
-			case STARTED:	
-				controller.add();
-				break;
-			}
+			controller.addButtonClicked();
 			break;
 		case R.id.reset_button:			
-			controller.reset();
-			status = Status.STOPPED;
+			controller.resetButtonClicked();
 			break;
 		}
 	}
