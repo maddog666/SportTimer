@@ -20,14 +20,8 @@ import android.widget.Button;
  * @author williamhu
  *
  */
-public class StopwatchActivity extends FragmentActivity implements OnClickListener {
-	
-						
+public class StopwatchActivity extends FragmentActivity implements OnClickListener {						
 	private StopwatchController controller;
-	private Button startButton;
-	private Button resetButton;
-	private Button pauseButton;
-	private Button addButton;
 	private Menu menu;
 	
 	
@@ -42,13 +36,13 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
         		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
         
         controller = new StopwatchController(getBaseContext(), clockview_fragment, listview_fragment);
-        startButton = (Button)findViewById(R.id.start_button);
+        Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
-        pauseButton = (Button)findViewById(R.id.pause_button);
+        Button pauseButton = (Button)findViewById(R.id.pause_button);
         pauseButton.setOnClickListener(this);
-        resetButton = (Button)findViewById(R.id.reset_button);
+        Button resetButton = (Button)findViewById(R.id.reset_button);
         resetButton.setOnClickListener(this);
-        addButton = (Button)findViewById(R.id.add_button);
+        Button addButton = (Button)findViewById(R.id.add_button);
         addButton.setOnClickListener(this);
         
         

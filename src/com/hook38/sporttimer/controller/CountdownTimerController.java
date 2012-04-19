@@ -17,7 +17,6 @@ public class CountdownTimerController extends ActivityController {
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
 	private Handler handler = new Handler(); 
-	private List<Float> list = new ArrayList<Float>();
 	private TimeInputView timeinputview;
 	
 	public CountdownTimerController(Context context, ClockView clockView, ListView listView, 
@@ -33,18 +32,7 @@ public class CountdownTimerController extends ActivityController {
 		
 	}
 	
-	private SharedPreferences loadPreference () {
-		SharedPreferences settings = context.getSharedPreferences(TAG, 0);
-		return settings;
-	}
 	
-	private void savePreferences (String name, SharedPreferences preferences, RoutineList list) {
-		SharedPreferences settings = context.getSharedPreferences(TAG, 0);
-		settings.edit().putString(
-				ROUTINE_LIST, 
-				list.toString()
-		).commit();	
-	}
 
 	private Runnable Timer = new Runnable() {
 		//private Handler handler = new Handler();		
