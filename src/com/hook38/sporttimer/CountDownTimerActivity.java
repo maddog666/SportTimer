@@ -3,6 +3,7 @@ package com.hook38.sporttimer;
 import com.hook38.sporttimer.controller.ActivityController;
 import com.hook38.sporttimer.controller.CountdownTimerController;
 import com.hook38.sporttimer.view.ClockView;
+import com.hook38.sporttimer.view.InteractiveListView;
 import com.hook38.sporttimer.view.ListView;
 import com.hook38.sporttimer.view.TimeInputView;
 
@@ -47,7 +48,7 @@ public class CountDownTimerActivity extends FragmentActivity implements OnClickL
         ClockView clockview_fragment = 
         		(ClockView) getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
         ListView listview_fragment = 
-        		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
+        		(InteractiveListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
         timeinputview_fragment = 
         		(TimeInputView) getSupportFragmentManager().findFragmentById(R.id.timer_input_fragment);
         
@@ -99,12 +100,15 @@ public class CountDownTimerActivity extends FragmentActivity implements OnClickL
 		switch(arg0.getId()) {
 		
 		case R.id.add_button:
+			/*
 			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 			alertDialog.setTitle("Time input");
 			alertDialog.setMessage(controller.getInputHour()+" " + 
 					controller.getInputMinute() + " " +
 					controller.getInputSecond());
 			alertDialog.show();
+			*/
+			controller.addTime();
 			break;
 		}
 	}

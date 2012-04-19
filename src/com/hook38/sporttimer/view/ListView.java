@@ -5,13 +5,17 @@ import java.util.List;
 
 import com.hook38.sporttimer.R;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.Toast;
 
 public class ListView extends ListFragment {
 	
@@ -27,6 +31,8 @@ public class ListView extends ListFragment {
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.listview_fragment, container, false);		
 	}
+	
+	
 	
 	public void populateList(List<String> list) {
 		ListAdapter myListAdapter = new ArrayAdapter<String> (

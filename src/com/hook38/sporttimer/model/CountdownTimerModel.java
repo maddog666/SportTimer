@@ -13,10 +13,11 @@ public class CountdownTimerModel {
 	private ArrayList<TimeUnits> list = new ArrayList<TimeUnits>();
 	
 	public void add(TimeUnits units) {
-		list.add(units);
+		list.add(0, units);
 	}
 	
-	public TimeUnits get(int posi) {
+	public TimeUnits get(int posi) 
+			throws ArrayIndexOutOfBoundsException {
 		return list.get(posi);
 	}
 	
@@ -28,11 +29,13 @@ public class CountdownTimerModel {
 		list.clear();
 	}
 	
-	public void remove(int i) {
+	public void remove(int i) 
+			throws ArrayIndexOutOfBoundsException {
 		list.remove(i);
 	}
 	
-	public void set(int posi, TimeUnits units) {
+	public void set(int posi, TimeUnits units) 
+			throws ArrayIndexOutOfBoundsException {
 		list.set(posi, units);
 	}
 	
@@ -48,7 +51,7 @@ public class CountdownTimerModel {
 				text = text.concat(",");
 				start = false;
 			}
-			text = text.concat(units.toString());
+			text = text.concat(units.toIntString());
 		}
 		return text;
 	}
@@ -56,7 +59,7 @@ public class CountdownTimerModel {
 	public List<String> toStringList() {
 		ArrayList<String> tempList = new ArrayList<String>();
 		for(TimeUnits units : this.list) {
-			tempList.add(units.toString());
+			tempList.add(units.toIntString());
 		}
 		return tempList;
 	}

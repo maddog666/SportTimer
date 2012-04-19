@@ -44,7 +44,7 @@
     	android:layout_height="0sp"
     	android:layout_width="fill_parent"/>
 	
-	<fragment android:name="com.hook38.sporttimer.view.ListView"
+	<fragment android:name="com.hook38.sporttimer.view.InteractiveListView"
 	    android:id="@+id/listview_fragment"
 	    android:layout_weight="5"
 	    android:layout_height="0dp"
