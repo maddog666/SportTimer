@@ -13,6 +13,7 @@ import com.hook38.sporttimer.utils.TimeUnits;
 import com.hook38.sporttimer.utils.countdowntimer.RoutineList;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
+import com.hook38.sporttimer.view.InteractiveListView;
 import com.hook38.sporttimer.view.TimeInputView;
 
 public class CountdownTimerController extends ActivityController {
@@ -25,6 +26,7 @@ public class CountdownTimerController extends ActivityController {
 	public CountdownTimerController(Context context, ClockView clockView, ListView listView, 
 			TimeInputView timeinput) {
 		super(context, clockView, listView);
+		((InteractiveListView)(this.listView)).setController(this);
 		// TODO Auto-generated constructor stub
 		this.timeinputview = timeinput;
 		this.timerModel = new CountdownTimerModel();

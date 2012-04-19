@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.hook38.sporttimer.utils.TimeUnits;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
@@ -60,5 +61,27 @@ public abstract class ActivityController {
 		listView.populateList(list);
 	}
 	
+	/**
+	 * Add the user defined time into the timer model
+	 * @param units
+	 */
+	public void addTime(TimeUnits units) {
+	}
+	
+	/**
+	 * Get the time in timer model given the 
+	 * @param posi position of the list
+	 * @return TimeUnits at the position
+	 */
+	public TimeUnits getTime(int posi) {
+		return null;
+	}
+	
+	/**
+	 * Remove the time at the defined position in the timer model
+	 * @param posi
+	 */
+	public void removeTime(int posi) {
+	}
 	public abstract void destroy();
 }
