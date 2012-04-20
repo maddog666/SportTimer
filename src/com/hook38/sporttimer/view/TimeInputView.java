@@ -50,4 +50,22 @@ public class TimeInputView extends Fragment {
 	public String getSecond() {
 		return rightInput.getText().toString();
 	}
+	
+	public void setHour(String text){
+		leftInput.setText(text);
+	}
+	
+	public void setMinute(String text){
+		middleInput.setText(text);
+	}
+	
+	public void setSecond(String text){
+		rightInput.setText(text);
+	}
+	
+	public void clear() {
+		setHour("0");
+		setMinute("0");
+		setSecond("0");
+	}
 }

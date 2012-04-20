@@ -27,9 +27,7 @@ import android.widget.EditText;
  * @author williamhu
  *
  */
-public class CountDownTimerActivity extends FragmentActivity implements OnClickListener {
-
-	CountdownTimerController controller;
+public class CountDownTimerActivity extends SportTimerActivity implements OnClickListener {
 	TimeInputView timeinputview_fragment;
 	Button startButton;
 	Button pauseButton;
@@ -108,7 +106,7 @@ public class CountDownTimerActivity extends FragmentActivity implements OnClickL
 					controller.getInputSecond());
 			alertDialog.show();
 			*/
-			controller.addTime();
+			getController().addTime();
 			break;
 		}
 	}
@@ -117,5 +115,9 @@ public class CountDownTimerActivity extends FragmentActivity implements OnClickL
 	public void onDestroy() {
 		super.onDestroy();
 		controller.destroy();
+	}
+	
+	public CountdownTimerController getController() {
+		return (CountdownTimerController)this.controller;
 	}
 }

@@ -20,8 +20,8 @@ import android.widget.Button;
  * @author williamhu
  *
  */
-public class StopwatchActivity extends FragmentActivity implements OnClickListener {						
-	private StopwatchController controller;
+public class StopwatchActivity extends SportTimerActivity implements OnClickListener {						
+
 	private Menu menu;
 	
 	
@@ -79,16 +79,16 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
 		// TODO Auto-generated method stub
 		switch (view.getId()) {
 		case R.id.start_button:
-			controller.startButtonClicked();
+			getController().startButtonClicked();
 			break;
 		case R.id.pause_button:
-			controller.pauseButtonClicked();
+			getController().pauseButtonClicked();
 			break;
 		case R.id.add_button:
-			controller.addButtonClicked();
+			getController().addButtonClicked();
 			break;
 		case R.id.reset_button:			
-			controller.resetButtonClicked();
+			getController().resetButtonClicked();
 			break;
 		}
 	}
@@ -98,4 +98,9 @@ public class StopwatchActivity extends FragmentActivity implements OnClickListen
 		super.onDestroy();
 		controller.destroy();
 	}
+	
+	public StopwatchController getController(){
+		return (StopwatchController)controller;
+	}
+	
 }
