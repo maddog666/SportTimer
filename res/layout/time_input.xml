@@ -6,7 +6,7 @@
     android:padding="5sp">
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#33FF77">
 	    <LinearLayout 
@@ -52,9 +52,16 @@
 	    	    android:text="0"/>
 	    	
 	    </LinearLayout>
-        
-        
-    </LinearLayout>
-    
-
+	</LinearLayout>
+	<LinearLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:padding="5sp">
+        <Button 
+            android:id="@+id/time_input_button"
+            android:layout_height="wrap_content"
+    	 	android:layout_width="wrap_content"
+    	 	android:text="@string/time_input_button"/>
+	</LinearLayout>
 </LinearLayout>

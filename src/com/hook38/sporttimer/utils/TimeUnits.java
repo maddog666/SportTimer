@@ -27,6 +27,10 @@ public class TimeUnits {
 		}
 	}
 	
+	public void add(String unit) throws NumberFormatException{
+		this.add(Float.parseFloat(unit));
+	}
+	
 	public void add(float unit) {
 		units.add(unit);
 	}
@@ -36,9 +40,9 @@ public class TimeUnits {
 		units.set(posi, unit);		
 	}
 	
-	public void get(int posi) 
+	public float get(int posi) 
 			throws ArrayIndexOutOfBoundsException {		
-		units.get(posi);		
+		return units.get(posi);		
 	}
 	
 	public void remove(int posi) 

@@ -1,13 +1,11 @@
 package com.hook38.sporttimer.view;
 
 import com.hook38.sporttimer.CountDownTimerActivity;
-import com.hook38.sporttimer.controller.ActivityController;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class InteractiveListView extends ListView {
@@ -29,12 +27,14 @@ public class InteractiveListView extends ListView {
 				    public void onClick(DialogInterface dialog, int item) {
 				    	switch(item){
 				    	case 0: //edit
-				    		
+				    		((CountDownTimerActivity)getActivity())
+			    			.getController()
+			    			.editTime(selected);
 				    		break;	
 				    	case 1: //delete
 				    		((CountDownTimerActivity)getActivity())
 				    			.getController()
-				    			.removeTime(selected);;
+				    			.removeTime(selected);
 				    		break;
 				    	default:
 				    		break;

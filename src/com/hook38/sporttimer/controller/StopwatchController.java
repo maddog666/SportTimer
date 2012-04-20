@@ -1,4 +1,5 @@
 package com.hook38.sporttimer.controller;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import com.hook38.sporttimer.view.ClockView;
@@ -27,8 +28,8 @@ public class StopwatchController extends ActivityController {
 		}
 	}
 	
-	public StopwatchController(Context context, ClockView clockView, ListView listview) {
-		super(context, clockView, listview);
+	public StopwatchController(/*Context context*/Activity activity, ClockView clockView, ListView listview) {
+		super(/*context*/activity, clockView, listview);
 		// TODO Auto-generated constructor stub
 	}
 	

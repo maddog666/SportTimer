@@ -10,4 +10,6 @@
 	<string name="exit_label">Exit</string>
 	<string name="countdown_repeat">Countdown Timer Repeat</string>
 	<string name="countdown_repeat_summary">Countdown Timer Repeat</string>
+	<string name="time_input_title">Enter your time</string>
+	<string name="time_input_button">Eneter</string>
 </resources>

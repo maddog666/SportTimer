@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.hook38.sporttimer.utils.TimeUnits;
@@ -11,6 +12,7 @@ import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
 public abstract class ActivityController {
+	private Activity activity;
 	protected ClockView clockView;
 	protected Context context;
 	protected ListView listView;
@@ -26,9 +28,11 @@ public abstract class ActivityController {
 				+ rightTimeString;
 	}
 	
-	public ActivityController(Context context, ClockView clockView, ListView listView) {
+	//public ActivityController(Context context, ClockView clockView, ListView listView) {
+		public ActivityController(Activity activity, ClockView clockView, ListView listView) {
 		this.clockView = clockView;
-		this.context = context;
+		//this.context = context;
+		this.activity = activity;
 		this.listView = listView;
 	}
 	
@@ -82,6 +86,14 @@ public abstract class ActivityController {
 	 * @param posi
 	 */
 	public void removeTime(int posi) {
+	}
+	
+	/**
+	 * Get the current activity that created this controller.
+	 * @return
+	 */
+	public Activity getActivity(){
+		return this.activity;
 	}
 	public abstract void destroy();
 }

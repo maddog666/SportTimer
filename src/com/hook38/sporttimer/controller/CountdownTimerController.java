@@ -1,33 +1,26 @@
 package com.hook38.sporttimer.controller;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Handler;
-import android.util.Log;
 
+import com.hook38.sporttimer.TimeInputActivity;
 import com.hook38.sporttimer.model.CountdownTimerModel;
 import com.hook38.sporttimer.utils.TimeUnits;
-import com.hook38.sporttimer.utils.countdowntimer.RoutineList;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
-import com.hook38.sporttimer.view.InteractiveListView;
-import com.hook38.sporttimer.view.TimeInputView;
 
 public class CountdownTimerController extends ActivityController {
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
+	private static final int ADD_CODE = 1;
+	private static final int EDIT_CODE = 2;
 	private Handler handler = new Handler(); 
-	private TimeInputView timeinputview;
 	private CountdownTimerModel timerModel;
 	
-	public CountdownTimerController(Context context, ClockView clockView, ListView listView, 
-			TimeInputView timeinput) {
-		super(context, clockView, listView);
+	public CountdownTimerController(Activity activity, ClockView clockView, ListView listView) {
+		super(/*context*/activity, clockView, listView);
 		// TODO Auto-generated constructor stub
-		this.timeinputview = timeinput;
 		this.timerModel = new CountdownTimerModel();
 	}
 
@@ -37,6 +30,23 @@ public class CountdownTimerController extends ActivityController {
 		
 	}
 	
+	public void handleTimeInput(int requestCode, Intent data) {
+		TimeUnits units = new TimeUnits();
+		units.add(data.getStringExtra("hour"));
+		units.add(data.getStringExtra("minute"));
+		units.add(data.getStringExtra("second"));
+		switch(requestCode){
+		case(CountdownTimerController.ADD_CODE):
+			//handle add time
+			this.addTime(units);
+			break;
+		case(CountdownTimerController.EDIT_CODE):			
+			//handle edit time
+			this.editTime(data.getExtras().getInt("posi"), units);
+			break;
+		}
+			
+	}
 	
 
 	private Runnable Timer = new Runnable() {
@@ -48,39 +58,18 @@ public class CountdownTimerController extends ActivityController {
 	};
 	
 	/**
-	 * Retrieve hour from the input field in timeinputview
-	 * @return hour inputed
+	 * Update the listView, that reflect the new routines. 
 	 */
-	public String getInputHour() {
-		return this.timeinputview.getHour();
-	}
-	
-	/**
-	 * Retrieve minute from the input field in timeinputview
-	 * @return minute inputed
-	 */
-	public String getInputMinute() {
-		return this.timeinputview.getMinute();
-	}
-	
-	/**
-	 * Retrieve second from the input field in timeinputview
-	 * @return second inputed
-	 */
-	public String getInputSecond() {
-		return this.timeinputview.getSecond();
-	}
-	
 	private void updateView() {
 		this.listView.populateList(timerModel.toStringList());
 	}
 	
+	/**
+	 * This initiate the activity, which allow user to add an time.
+	 */
 	public void addTime() {
-		TimeUnits units = new TimeUnits();
-		units.add(Float.parseFloat(getInputHour()));
-		units.add(Float.parseFloat(getInputMinute()));
-		units.add(Float.parseFloat(getInputSecond()));
-		this.addTime(units);
+		Intent i = new Intent(getActivity(), TimeInputActivity.class);
+		getActivity().startActivityForResult(i, CountdownTimerController.ADD_CODE);
 	}
 	
 	/**
@@ -115,6 +104,37 @@ public class CountdownTimerController extends ActivityController {
 	 */
 	public void removeTime(int posi) {
 		timerModel.remove(posi);
+		this.updateView();
+	}
+
+	/**
+	 * This is the method which start up the activity that allow user to make modification
+	 * of a prestored time.
+	 * @param posi position of the time that want to be modify
+	 */
+	public void editTime(int posi) {
+		Intent i = new Intent(getActivity(), TimeInputActivity.class);
+		TimeUnits units = this.getTime(posi);
+		i.putExtra("hour", Integer.toString(
+								Math.round(
+									units.get(0))));
+		i.putExtra("minute", Integer.toString(
+								Math.round(	
+									units.get(1))));
+		i.putExtra("second", Integer.toString(
+								Math.round(
+									units.get(2))));
+		i.putExtra("posi", posi);
+		getActivity().startActivityForResult(i, CountdownTimerController.EDIT_CODE);
+	}
+	
+	/**
+	 * This is how the controller handle edit time internally
+	 * @param posi
+	 * @param units
+	 */
+	private void editTime(int posi, TimeUnits units) {
+		timerModel.set(posi, units);
 		this.updateView();
 	}
 	

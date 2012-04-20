@@ -35,7 +35,7 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
         ListView listview_fragment = 
         		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
         
-        controller = new StopwatchController(getBaseContext(), clockview_fragment, listview_fragment);
+        controller = new StopwatchController(/*getBaseContext()*/this, clockview_fragment, listview_fragment);
         Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         Button pauseButton = (Button)findViewById(R.id.pause_button);
