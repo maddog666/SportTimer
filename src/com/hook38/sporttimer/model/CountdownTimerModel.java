@@ -51,7 +51,7 @@ public class CountdownTimerModel {
 				text = text.concat(",");
 				start = false;
 			}
-			text = text.concat(units.toIntString());
+			text = text.concat(units.toString());
 		}
 		return text;
 	}
@@ -59,7 +59,7 @@ public class CountdownTimerModel {
 	public List<String> toStringList() {
 		ArrayList<String> tempList = new ArrayList<String>();
 		for(TimeUnits units : this.list) {
-			tempList.add(units.toIntString());
+			tempList.add(units.toString());
 		}
 		return tempList;
 	}

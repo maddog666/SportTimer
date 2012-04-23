@@ -1,7 +1,10 @@
 package com.hook38.sporttimer.controller;
+
 import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -17,6 +20,17 @@ public class CountdownTimerController extends ActivityController {
 	private static final String ROUTINE_LIST = "RoutineList";
 	private static final int ADD_CODE = 1;
 	private static final int EDIT_CODE = 2;
+	
+	private MediaPlayer mp;
+	
+	//time which timer start
+	private long startTime;
+	//time which timer paused
+	private long pauseTime;
+	//total summed paused time (paused time - restart time)
+	private long pausedTime;
+	private long stopTime;
+	
 	private Handler handler = new Handler(); 
 	private CountdownTimerModel timerModel;
 	
@@ -49,15 +63,43 @@ public class CountdownTimerController extends ActivityController {
 		}
 			
 	}
-	
 
-	private Runnable Timer = new Runnable() {
-		//private Handler handler = new Handler();		
-		public void run() {
+	public void startTimer() {		
+		startTimerThread(0);
+	}
+	
+	private void startTimerThread(int posi){
+		final int currentPosi = posi;
+		try{
+			TimeUnits time = timerModel.get(posi);
+			long millis = time.getMillisFromHour(0);
 			
-			handler.postDelayed(this, 10);
+			new CountDownTimer(millis, 100) {
+			     public void onTick(long millis) {
+			    	 long hours = millis/(1000 * 60 * 60);
+						long mins = millis/(1000 * 60);
+						long secs = (millis/1000) % 60;
+						//long centisecs = (millis/10) % 100;
+						setTime(hours, mins, secs);
+			     }
+	
+			     public void onFinish() {
+			    	 setTime(0, 0, 0);
+			    	 int resid = R.raw.beep;
+			    	 if(mp!=null) {
+			    		 mp.release();
+			    	 }
+			    	 mp = MediaPlayer.create(getActivity(), resid);
+			    	 mp.start();
+			    	 startTimerThread(currentPosi + 1);
+			     }
+			}.start();
+		}catch(IndexOutOfBoundsException e) {
+			
 		}
-	};
+	}
+
+	
 	
 	/**
 	 * Update the listView, that reflect the new routines. 
@@ -124,14 +166,11 @@ public class CountdownTimerController extends ActivityController {
 		Intent i = new Intent(getActivity(), TimeInputActivity.class);
 		TimeUnits units = this.getTime(posi);
 		i.putExtra("hour", Integer.toString(
-								Math.round(
-									units.get(0))));
+								units.get(0)));
 		i.putExtra("minute", Integer.toString(
-								Math.round(	
-									units.get(1))));
+								units.get(1)));
 		i.putExtra("second", Integer.toString(
-								Math.round(
-									units.get(2))));
+								units.get(2)));
 		i.putExtra("posi", posi);
 		getActivity().startActivityForResult(i, CountdownTimerController.EDIT_CODE);
 	}
@@ -149,7 +188,7 @@ public class CountdownTimerController extends ActivityController {
 			Toast.makeText(this.getActivity().getApplicationContext(), 
 				this.getActivity().getString(R.string.no_time_warning), 
 				Toast.LENGTH_SHORT).show();
-	}
+		}
 	}
 	
 }

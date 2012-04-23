@@ -6,6 +6,7 @@ import com.hook38.sporttimer.view.InteractiveListView;
 import com.hook38.sporttimer.view.ListView;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +35,8 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.countdowntimer);
+        
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         
         //retrieve building block fragments
         ClockView clockview_fragment = 
@@ -97,6 +100,9 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		
 		case R.id.add_button:
 			getController().addTime();
+			break;
+		case R.id.start_button:
+			getController().startTimer();
 			break;
 		}
 	}
