@@ -3,7 +3,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.widget.Toast;
 
+import com.hook38.sporttimer.R;
 import com.hook38.sporttimer.TimeInputActivity;
 import com.hook38.sporttimer.model.CountdownTimerModel;
 import com.hook38.sporttimer.utils.TimeUnits;
@@ -85,8 +87,14 @@ public class CountdownTimerController extends ActivityController {
 	 * @param units
 	 */
 	public void addTime(TimeUnits units) {
-		timerModel.add(units);
-		this.updateView();
+		if(!units.hasNoTime()){
+			timerModel.add(units);
+			this.updateView();
+		}else{
+			Toast.makeText(this.getActivity().getApplicationContext(), 
+					this.getActivity().getString(R.string.no_time_warning), 
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	/**
@@ -134,8 +142,14 @@ public class CountdownTimerController extends ActivityController {
 	 * @param units
 	 */
 	private void editTime(int posi, TimeUnits units) {
-		timerModel.set(posi, units);
-		this.updateView();
+		if(!units.hasNoTime()) {
+			timerModel.set(posi, units);
+			this.updateView();
+		}else{
+			Toast.makeText(this.getActivity().getApplicationContext(), 
+				this.getActivity().getString(R.string.no_time_warning), 
+				Toast.LENGTH_SHORT).show();
+	}
 	}
 	
 }

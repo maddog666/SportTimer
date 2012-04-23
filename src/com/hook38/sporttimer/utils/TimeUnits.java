@@ -33,6 +33,7 @@ public class TimeUnits {
 	
 	public void add(float unit) {
 		units.add(unit);
+
 	}
 	
 	public void set(int posi, float unit) 
@@ -42,6 +43,7 @@ public class TimeUnits {
 	
 	public float get(int posi) 
 			throws ArrayIndexOutOfBoundsException {		
+		
 		return units.get(posi);		
 	}
 	
@@ -75,6 +77,28 @@ public class TimeUnits {
 			string+=(Math.round(units.get(i)));
 		}
 		return string;
+	}
+	
+	private boolean isEmpty(){
+		return units.isEmpty();
+	}
+	
+	
+	/**
+	 * Determine if this timeunits has no time, e.g. 0 hour, 0 min, 0 sec.
+	 * @return whether this timeunit has no time.
+	 */
+	public boolean hasNoTime(){
+		if(this.isEmpty()) {
+			return true;
+		} else{
+			for(Float time : units) {
+				if(time!=0){
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 	
 	

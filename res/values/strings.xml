@@ -12,4 +12,5 @@
 	<string name="countdown_repeat_summary">Countdown Timer Repeat</string>
 	<string name="time_input_title">Enter your time</string>
 	<string name="time_input_button">Eneter</string>
+	<string name="no_time_warning">Time cannot be 0</string>
 </resources>
