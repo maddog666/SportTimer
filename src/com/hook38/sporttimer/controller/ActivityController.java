@@ -19,7 +19,7 @@ public abstract class ActivityController {
 	private String leftTimeString;
 	private String midTimeString;
 	private String rightTimeString;
-	protected Runnable Timer;
+	//protected Runnable Timer;
 	private ArrayList<String> list = new ArrayList<String>();
 	
 	public String getTimeString() {

@@ -1,11 +1,15 @@
 package com.hook38.sporttimer.controller;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import android.app.Activity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.hook38.sporttimer.R;
@@ -15,11 +19,18 @@ import com.hook38.sporttimer.utils.TimeUnits;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
-public class CountdownTimerController extends ActivityController {
+public class CountdownTimerController extends ActivityController{
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
 	private static final int ADD_CODE = 1;
 	private static final int EDIT_CODE = 2;
+	private static int posi = 0;
+	
+	private enum Status {STOPPED, 
+		PAUSED, 
+		STARTED};
+		
+	private Status status = Status.STOPPED;
 	
 	private MediaPlayer mp;
 	
@@ -28,8 +39,12 @@ public class CountdownTimerController extends ActivityController {
 	//time which timer paused
 	private long pauseTime;
 	//total summed paused time (paused time - restart time)
-	private long pausedTime;
+	private long pausedTime = 0;
 	private long stopTime;
+	//time left on the countdown clock
+	private long countdownTime;
+	
+	
 	
 	private Handler handler = new Handler(); 
 	private CountdownTimerModel timerModel;
@@ -64,42 +79,67 @@ public class CountdownTimerController extends ActivityController {
 			
 	}
 
-	public void startTimer() {		
-		startTimerThread(0);
+	public void startButtonClicked() {	
+		switch(status) {
+		case STOPPED:			
+			this.posi = 0;
+			startTimer(posi);
+		}
 	}
 	
-	private void startTimerThread(int posi){
-		final int currentPosi = posi;
-		try{
+	private void startTimer(int posi) {
+		try{		
+			startTime = System.currentTimeMillis();
 			TimeUnits time = timerModel.get(posi);
-			long millis = time.getMillisFromHour(0);
-			
-			new CountDownTimer(millis, 100) {
-			     public void onTick(long millis) {
-			    	 long hours = millis/(1000 * 60 * 60);
-						long mins = millis/(1000 * 60);
-						long secs = (millis/1000) % 60;
-						//long centisecs = (millis/10) % 100;
-						setTime(hours, mins, secs);
-			     }
-	
-			     public void onFinish() {
-			    	 setTime(0, 0, 0);
-			    	 int resid = R.raw.beep;
-			    	 if(mp!=null) {
-			    		 mp.release();
-			    	 }
-			    	 mp = MediaPlayer.create(getActivity(), resid);
-			    	 mp.start();
-			    	 startTimerThread(currentPosi + 1);
-			     }
-			}.start();
-		}catch(IndexOutOfBoundsException e) {
+			countdownTime = time.getMillisFromHour(0);
+			Countdown countdown = new Countdown();
+			status = Status.STARTED;
+			handler.post(countdown);
+		} catch (IndexOutOfBoundsException e) {
 			
 		}
 	}
+	
+	public void pauseButtonClicked() {
+		
+	}
+	
 
 	
+	private class Countdown implements Runnable {
+		//private Handler handler = new Handler();		
+		public void run() {
+			long millis = countdownTime - (System.currentTimeMillis() - startTime) + pausedTime;
+			if(millis <=0) {
+				onFinish();
+				return;
+			}
+			long hours = millis/(1000 * 60 * 60);
+			long mins = millis/(1000 * 60);
+			long secs = (millis/1000) % 60;
+			//long centisecs = (countdownTime/10) % 100;
+			setTime(hours, mins, secs);
+			handler.postDelayed(this, 100);
+		}
+		
+		public void onFinish(){
+			setTime(0, 0, 0);
+			beepSound();
+			status = Status.STOPPED;
+			handler.removeCallbacks(this);
+			posi++;
+			startTimer(posi);
+		}
+	};
+
+	private void beepSound(){
+		int resid = R.raw.beep;
+   	 	if(mp!=null) {
+   	 		mp.release();
+   	 	}
+   	 	mp = MediaPlayer.create(getActivity(), resid);
+   	 	mp.start();  	 
+	}
 	
 	/**
 	 * Update the listView, that reflect the new routines. 

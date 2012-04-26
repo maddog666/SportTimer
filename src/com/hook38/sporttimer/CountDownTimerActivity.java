@@ -102,7 +102,10 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 			getController().addTime();
 			break;
 		case R.id.start_button:
-			getController().startTimer();
+			getController().startButtonClicked();
+			break;
+		case R.id.pause_button:
+			getController().pauseButtonClicked();
 			break;
 		}
 	}
