@@ -21,8 +21,8 @@ public class StopwatchController extends ActivityController {
 	private Handler handler = new Handler();
 
 	
-	
-	public void destroy() {
+	@Override
+	public void close() {
 		if(handler != null) {
 			handler.removeCallbacks(Timer);
 		}

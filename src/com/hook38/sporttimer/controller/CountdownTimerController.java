@@ -1,8 +1,4 @@
 package com.hook38.sporttimer.controller;
-
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 
 import android.content.Intent;
@@ -25,6 +21,7 @@ public class CountdownTimerController extends ActivityController{
 	private static final int ADD_CODE = 1;
 	private static final int EDIT_CODE = 2;
 	private static int posi = 0;
+	private static CountdownTimerStoreController storeController;
 	
 	private enum Status {STOPPED, 
 		PAUSED, 
@@ -43,9 +40,6 @@ public class CountdownTimerController extends ActivityController{
 	private long stopTime;
 	//time left on the countdown clock
 	private long countdownTime;
-	
-	
-	
 	private Handler handler = new Handler(); 
 	private CountdownTimerModel timerModel;
 	
@@ -53,12 +47,24 @@ public class CountdownTimerController extends ActivityController{
 		super(/*context*/activity, clockView, listView);
 		// TODO Auto-generated constructor stub
 		this.timerModel = new CountdownTimerModel();
+		storeController  = new CountdownTimerStoreController(activity);
 	}
 
 	@Override
-	public void destroy() {
+	public void close() {
 		// TODO Auto-generated method stub
-		
+		storeController.close();
+	}
+	
+	public void saveRoutine() {
+		Log.d("CountdownTimerController", "saveRoutine");
+		storeController.storeTimerModel(timerModel, "test");
+	}
+	
+	public void loadRoutine() {
+		Log.d("CountdownTimerController", "loadRoutine");
+		timerModel = storeController.retrieveTimerModel("test");
+		listView.populateList(timerModel.toStringList());
 	}
 	
 	public void handleTimeInput(int requestCode, Intent data) {
@@ -149,7 +155,8 @@ public class CountdownTimerController extends ActivityController{
 	}
 	
 	/**
-	 * This initiate the activity, which allow user to add an time.
+	 * This initiate the input time activity, which allow user to input
+	 *  an time.
 	 */
 	public void addTime() {
 		Intent i = new Intent(getActivity(), TimeInputActivity.class);
@@ -230,5 +237,7 @@ public class CountdownTimerController extends ActivityController{
 				Toast.LENGTH_SHORT).show();
 		}
 	}
+	
+
 	
 }

@@ -17,6 +17,10 @@ public class TimeUnits {
 	
 	public TimeUnits(String string) {
 		this();
+		this.setUnit(string);
+	}
+	
+	protected void setUnit(String string) {
 		String [] unitsString = string.split(":");
 		for(int i=0; i<unitsString.length; i++) {
 			try{

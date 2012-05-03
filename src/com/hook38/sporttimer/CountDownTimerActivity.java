@@ -25,10 +25,7 @@ import android.widget.Toast;
  *
  */
 public class CountDownTimerActivity extends SportTimerActivity implements OnClickListener {
-	Button startButton;
-	Button pauseButton;
-	Button restartButton;
-	Button addButton;
+
 
 	
 	@Override
@@ -49,14 +46,18 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         											listview_fragment);
         
         
-        startButton = (Button)findViewById(R.id.start_button);
+        Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
-        pauseButton = (Button)findViewById(R.id.pause_button);
+        Button pauseButton = (Button)findViewById(R.id.pause_button);
         pauseButton.setOnClickListener(this);
-        restartButton = (Button)findViewById(R.id.restart_button);
+        Button restartButton = (Button)findViewById(R.id.restart_button);
         restartButton.setOnClickListener(this);
-        addButton = (Button)findViewById(R.id.add_button);
+        Button addButton = (Button)findViewById(R.id.add_button);
         addButton.setOnClickListener(this);
+        Button saveButton = (Button)findViewById(R.id.save_button);
+        saveButton.setOnClickListener(this);
+        Button loadButton = (Button)findViewById(R.id.load_button);
+        loadButton.setOnClickListener(this);
 	}
 	
 	@Override
@@ -107,13 +108,19 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		case R.id.pause_button:
 			getController().pauseButtonClicked();
 			break;
+		case R.id.save_button:
+			getController().saveRoutine();
+			break;
+		case R.id.load_button:
+			getController().loadRoutine();
+			break;
 		}
 	}
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.destroy();
+		controller.close();
 	}
 	
 	public CountdownTimerController getController() {

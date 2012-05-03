@@ -96,7 +96,7 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.destroy();
+		controller.close();
 	}
 	
 	public StopwatchController getController(){

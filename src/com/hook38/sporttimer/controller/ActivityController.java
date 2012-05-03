@@ -95,5 +95,5 @@ public abstract class ActivityController {
 	public Activity getActivity(){
 		return this.activity;
 	}
-	public abstract void destroy();
+	public abstract void close();
 }
