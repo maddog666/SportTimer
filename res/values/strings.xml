@@ -11,6 +11,16 @@
 	<string name="countdown_repeat">Countdown Timer Repeat</string>
 	<string name="countdown_repeat_summary">Countdown Timer Repeat</string>
 	<string name="time_input_title">Enter your time</string>
-	<string name="time_input_button">Eneter</string>
+	<string name="text_input_title">Enter your text</string>
+	<string name="enter_button">Enter</string>
 	<string name="no_time_warning">Time cannot be 0</string>
+	<string name="no_text_warning">Input text cannot be empty</string>
+	<string name="default_routine_name">Untitled</string>
+	<string name="routine_prompt">Select routine</string>
+	
+	<string name="add">Add</string>
+	<string name="edit">Edit</string>
+	<string name="remove">Remove</string>
+	
+	<string name="text_input_hint">Input text</string>
 </resources>

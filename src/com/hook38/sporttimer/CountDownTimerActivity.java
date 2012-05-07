@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
@@ -26,7 +27,7 @@ import android.widget.Toast;
  */
 public class CountDownTimerActivity extends SportTimerActivity implements OnClickListener {
 
-
+	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,14 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         //retrieve building block fragments
         ClockView clockview_fragment = 
         		(ClockView) getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
-        ListView listview_fragment = 
+        InteractiveListView listview_fragment = 
         		(InteractiveListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
 
         controller = new CountdownTimerController(this, 
         											clockview_fragment, 
         											listview_fragment);
+        
+        controller.initiate();
         
         
         Button startButton = (Button)findViewById(R.id.start_button);
@@ -58,13 +61,14 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         saveButton.setOnClickListener(this);
         Button loadButton = (Button)findViewById(R.id.load_button);
         loadButton.setOnClickListener(this);
+        
 	}
 	
 	@Override
     public void onActivityResult(int requestCode,int resultCode,Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == RESULT_OK){
-			getController().handleTimeInput(requestCode, data);
+			getController().handleInput(requestCode, data);
 		}
     }
 	
@@ -109,10 +113,10 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 			getController().pauseButtonClicked();
 			break;
 		case R.id.save_button:
-			getController().saveRoutine();
+			getController().saveRoutineButtonClicked();
 			break;
 		case R.id.load_button:
-			getController().loadRoutine();
+			getController().loadRoutineButtonClicked();
 			break;
 		}
 	}
@@ -126,4 +130,6 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	public CountdownTimerController getController() {
 		return (CountdownTimerController)this.controller;
 	}
+	
+
 }

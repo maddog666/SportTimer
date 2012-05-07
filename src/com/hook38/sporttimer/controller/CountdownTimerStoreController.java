@@ -1,5 +1,6 @@
 package com.hook38.sporttimer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -50,11 +51,33 @@ public class CountdownTimerStoreController {
 	 */
 	public void storeTimerModel(CountdownTimerModel model, String routineName) {	
 		long routineId = this.storeRoutine(routineName);
-		unitDao.deleteAll();
+		Log.d("CountdownTimerStoreController", routineName+" "+routineId);
+		this.deleteTimeUnitsByRoutineId(routineId);
 		for(int i=model.size()-1; i>=0; i--) {
 			this.storeTimeUnit(model.get(i).toString(), i, routineId);
 			
 		}		
+	}
+	
+	private void deleteTimeUnitsByRoutineId(long id) {
+		List<TimeUnitSQL> units = this.retrieveStoredTimeUnits(id);
+		for(TimeUnitSQL unit:units) {
+			unitDao.delete(unit);
+		}
+	}
+	
+	public void editRoutine(String oldName, String newName) {
+		RoutineSQL routine = this.retrieveStoredRoutine(oldName);
+		routine.setName(newName);
+		routineDao.update(routine);
+				
+	}
+	
+	public void deleteRoutine(String routineName) {
+		RoutineSQL routine = this.retrieveStoredRoutine(routineName);
+		this.deleteTimeUnitsByRoutineId(routine.getId());
+		//routineDao.delete(routine);
+		daoSession.delete(routine);
 	}
 	
 	public CountdownTimerModel retrieveTimerModel(String routineName) {
@@ -79,8 +102,7 @@ public class CountdownTimerStoreController {
 	 * @param routineName name of the routine.
 	 * @return ID of the routine, given the name.
 	 */
-	private long storeRoutine(String routineName) throws ClassCastException {
-		Log.d("CountdownTimerStoreController", "storeRoutine");
+	public long storeRoutine(String routineName) throws ClassCastException {
 
 		RoutineSQL storedRoutine = this.retrieveStoredRoutine(routineName);
 		if(storedRoutine == null) {
@@ -160,10 +182,23 @@ public class CountdownTimerStoreController {
 	 * Return a list of all stored routine in the database.
 	 * @return a list of all stored routine.
 	 */
-	private List<RoutineSQL> retrieveStoredRoutine () { 
+	private List<RoutineSQL> retrieveStoredRoutines () { 
 		return routineDao.queryBuilder()
 			.orderAsc(com.hook38.sporttimer.model.sql
 					.RoutineSQLDao.Properties.Name)
 			.list();
+	}
+	
+	/**
+	 * An access point to routines.
+	 * @return A list of routines
+	 */
+	public List<String> getRoutines() {
+		List<RoutineSQL> sqlList = this.retrieveStoredRoutines();
+		List<String> list = new ArrayList<String>();
+		for(RoutineSQL routine:sqlList) {
+			list.add(routine.getName());
+		}
+		return list;
 	}
 }

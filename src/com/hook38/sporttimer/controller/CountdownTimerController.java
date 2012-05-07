@@ -1,4 +1,6 @@
 package com.hook38.sporttimer.controller;
+import java.util.List;
+
 import android.app.Activity;
 
 import android.content.Intent;
@@ -9,17 +11,21 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.hook38.sporttimer.R;
+import com.hook38.sporttimer.TextInputActivity;
 import com.hook38.sporttimer.TimeInputActivity;
 import com.hook38.sporttimer.model.CountdownTimerModel;
 import com.hook38.sporttimer.utils.TimeUnits;
 import com.hook38.sporttimer.view.ClockView;
+import com.hook38.sporttimer.view.InteractiveListView;
 import com.hook38.sporttimer.view.ListView;
 
 public class CountdownTimerController extends ActivityController{
 	private static final String TAG = "CountdownTimer";
 	private static final String ROUTINE_LIST = "RoutineList";
-	private static final int ADD_CODE = 1;
-	private static final int EDIT_CODE = 2;
+	private static final int TIME_ADD_CODE = 1;
+	private static final int TIME_EDIT_CODE = 2;
+	private static final int TEXT_ADD_CODE = 4;
+	private static final int TEXT_EDIT_CODE = 5;
 	private static int posi = 0;
 	private static CountdownTimerStoreController storeController;
 	
@@ -43,11 +49,23 @@ public class CountdownTimerController extends ActivityController{
 	private Handler handler = new Handler(); 
 	private CountdownTimerModel timerModel;
 	
-	public CountdownTimerController(Activity activity, ClockView clockView, ListView listView) {
+	public CountdownTimerController(Activity activity, ClockView clockView, InteractiveListView listView) {
 		super(/*context*/activity, clockView, listView);
 		// TODO Auto-generated constructor stub
 		this.timerModel = new CountdownTimerModel();
 		storeController  = new CountdownTimerStoreController(activity);
+	}
+	
+	@Override
+	public void initiate() {
+		this.loadRoutineSpinner();
+	}
+	
+	private void loadRoutineSpinner() {
+		Log.d("CountdownTimerController", "loadRoutineSpinner");
+		List<String> list = storeController.getRoutines();
+		((InteractiveListView)listView).populateSpinner(list);
+		
 	}
 
 	@Override
@@ -56,33 +74,106 @@ public class CountdownTimerController extends ActivityController{
 		storeController.close();
 	}
 	
-	public void saveRoutine() {
-		Log.d("CountdownTimerController", "saveRoutine");
-		storeController.storeTimerModel(timerModel, "test");
+	private void addRoutine(String name) {
+		storeController.storeRoutine(name);
 	}
 	
-	public void loadRoutine() {
-		Log.d("CountdownTimerController", "loadRoutine");
-		timerModel = storeController.retrieveTimerModel("test");
+	public void removeRoutine(String name) {
+		storeController.deleteRoutine(name);
+	}
+	
+	public void saveRoutine(String routineName) {
+		Log.d("CountdownTimerController", "saveRoutine: "+routineName);
+		storeController.storeTimerModel(timerModel, routineName);
+	}
+	
+	private void editRoutine(String oldName, String newName) {
+		storeController.editRoutine(oldName, newName);
+	}
+	
+	public void saveRoutineButtonClicked() {
+		this.saveRoutine(((InteractiveListView)listView).getSelectedRoutine());
+		
+	}
+	
+	public void loadRoutineButtonClicked() {
+		this.loadRoutine(((InteractiveListView)listView).getSelectedRoutine());
+	}
+	
+	public void loadRoutine(String routineName) {
+		Log.d("CountdownTimerController", "loadRoutine: "+routineName);
+		timerModel = storeController.retrieveTimerModel(routineName);
 		listView.populateList(timerModel.toStringList());
 	}
 	
-	public void handleTimeInput(int requestCode, Intent data) {
-		TimeUnits units = new TimeUnits();
-		units.add(data.getStringExtra("hour"));
-		units.add(data.getStringExtra("minute"));
-		units.add(data.getStringExtra("second"));
-		switch(requestCode){
-		case(CountdownTimerController.ADD_CODE):
-			//handle add time
-			this.addTime(units);
-			break;
-		case(CountdownTimerController.EDIT_CODE):			
-			//handle edit time
-			this.editTime(data.getExtras().getInt("posi"), units);
-			break;
+	public void handleInput(int requestCode, Intent data) {
+		if(requestCode == CountdownTimerController.TIME_ADD_CODE ||
+				requestCode == CountdownTimerController.TIME_EDIT_CODE) {
+			//handle time input
+			TimeUnits units = new TimeUnits();
+			units.add(data.getStringExtra("hour"));
+			units.add(data.getStringExtra("minute"));
+			units.add(data.getStringExtra("second"));
+			switch(requestCode){
+			case(CountdownTimerController.TIME_ADD_CODE):
+				//handle add time
+				this.addTime(units);
+				break;
+			case(CountdownTimerController.TIME_EDIT_CODE):			
+				//handle edit time
+				this.editTime(data.getExtras().getInt("posi"), units);
+				break;
+			}
+		}else{
+			//handle text input
+			String text = data.getStringExtra("text");
+			if(text == null || text.length() < 1) {
+				Toast.makeText(this.getActivity().getApplicationContext(), 
+						this.getActivity().getString(R.string.no_text_warning), 
+						Toast.LENGTH_SHORT).show();
+			}
+			switch(requestCode) {
+			case(CountdownTimerController.TEXT_ADD_CODE):
+				this.addRoutine(text);
+				//focus to the added routine
+				this.loadListView(text);
+				break;
+			case(CountdownTimerController.TEXT_EDIT_CODE):
+				String originalText = data.getStringExtra("originaltext");
+				this.editRoutine(originalText, text);
+				this.loadListView(text);
+				break;
+			}
 		}
 			
+	}
+	
+	/**
+	 * Given the name of the intentional select routine item, reload the routine spinner, 
+	 * select the routine item, and load the routine time units from the listview.
+	 * @param text name of the intentional selection routine.
+	 */
+	private void loadListView(String text) {
+		this.loadRoutineSpinner();
+		((InteractiveListView)listView).selectSpinner(text);
+		this.loadRoutine();
+	}
+	
+	
+	public void addRoutineButtonClicked() {
+		Intent i = new Intent(getActivity(), TextInputActivity.class);
+		getActivity().startActivityForResult(i, CountdownTimerController.TEXT_ADD_CODE);
+	}
+	
+	public void editRoutineButtonClicked(String originalName) {
+		Intent i = new Intent(getActivity(), TextInputActivity.class);
+		i.putExtra("text", originalName);
+		getActivity().startActivityForResult(i, CountdownTimerController.TEXT_EDIT_CODE);
+	}
+	
+	public void removeRoutineButtonClicked(String name) {
+		this.removeRoutine(name);
+		this.loadRoutine();
 	}
 
 	public void startButtonClicked() {	
@@ -156,11 +247,11 @@ public class CountdownTimerController extends ActivityController{
 	
 	/**
 	 * This initiate the input time activity, which allow user to input
-	 *  an time.
+	 *  a time.
 	 */
 	public void addTime() {
 		Intent i = new Intent(getActivity(), TimeInputActivity.class);
-		getActivity().startActivityForResult(i, CountdownTimerController.ADD_CODE);
+		getActivity().startActivityForResult(i, CountdownTimerController.TIME_ADD_CODE);
 	}
 	
 	/**
@@ -219,7 +310,7 @@ public class CountdownTimerController extends ActivityController{
 		i.putExtra("second", Integer.toString(
 								units.get(2)));
 		i.putExtra("posi", posi);
-		getActivity().startActivityForResult(i, CountdownTimerController.EDIT_CODE);
+		getActivity().startActivityForResult(i, CountdownTimerController.TIME_EDIT_CODE);
 	}
 	
 	/**
@@ -238,6 +329,12 @@ public class CountdownTimerController extends ActivityController{
 		}
 	}
 	
-
+	/**
+	 * Determine the currently selected item from the routine spinner, and update
+	 * the routine list, given the routine selected.
+	 */
+	private void loadRoutine() {
+		this.loadRoutine(((InteractiveListView)listView).getSelectedRoutine());
+	}
 	
 }

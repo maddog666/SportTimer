@@ -96,4 +96,5 @@ public abstract class ActivityController {
 		return this.activity;
 	}
 	public abstract void close();
+	public abstract void initiate();
 }

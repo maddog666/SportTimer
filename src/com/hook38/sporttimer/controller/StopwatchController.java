@@ -20,6 +20,10 @@ public class StopwatchController extends ActivityController {
 	private long pausedTime;
 	private Handler handler = new Handler();
 
+	@Override
+	public void initiate() {
+		
+	}
 	
 	@Override
 	public void close() {
