@@ -5,17 +5,31 @@
     android:orientation="horizontal" 
     android:padding="10sp">
     
+    	<LinearLayout
+	        android:layout_height="fill_parent"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:background="#11aaaa"
+	        android:id="@+id/hour_linearlayout">"
+	        <TextView
+	            style="@style/Title"
+	            android:layout_height="fill_parent"
+	            android:layout_width="fill_parent"
+	            android:id="@+id/hour_textview"
+	            android:text="00" />         
+	            
+	    </LinearLayout>
 	    <LinearLayout
 	        android:layout_height="fill_parent"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:background="#11aaaa"
-	        android:id="@+id/left_linearlayout">"
+	        android:id="@+id/min_linearlayout">"
 	        <TextView
 	            style="@style/Title"
 	            android:layout_height="fill_parent"
 	            android:layout_width="fill_parent"
-	            android:id="@+id/left_textview"
+	            android:id="@+id/min_textview"
 	            android:text="00" />         
 	            
 	    </LinearLayout>
@@ -24,12 +38,12 @@
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:background="#aa11aa"
-	        android:id="@+id/middle_linearlayout">
+	        android:id="@+id/sec_linearlayout">
 	        <TextView
 	            style="@style/Title"
 	            android:layout_height="fill_parent"
 	            android:layout_width="fill_parent"
-	            android:id="@+id/middle_textview"
+	            android:id="@+id/sec_textview"
 	            android:text="00" />
 	    </LinearLayout>
 	    <LinearLayout
@@ -37,12 +51,12 @@
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:background="#aaaa11"
-	        android:id="@+id/right_linearlayout">
+	        android:id="@+id/centisec_linearlayout">
 	        <TextView
 	            style="@style/Title"
 	            android:layout_height="fill_parent"
 	            android:layout_width="fill_parent"
-	            android:id="@+id/right_textview"
+	            android:id="@+id/centisec_textview"
 	            android:text="00" />
 	    </LinearLayout>
 	     

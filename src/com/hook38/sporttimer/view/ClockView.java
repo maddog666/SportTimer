@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ClockView extends Fragment {
-	TextView leftText;
-	TextView middleText;
-	TextView rightText;
+	TextView hourText;
+	TextView minText;
+	TextView secText;
+	TextView centisecText;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -20,9 +21,10 @@ public class ClockView extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		leftText = (TextView) (TextView)getView().findViewById(R.id.left_textview);
-		middleText = (TextView) (TextView)getView().findViewById(R.id.middle_textview);
-		rightText = (TextView) (TextView)getView().findViewById(R.id.right_textview);
+		hourText = (TextView) (TextView)getView().findViewById(R.id.hour_textview);
+		minText = (TextView) (TextView)getView().findViewById(R.id.min_textview);
+		secText = (TextView) (TextView)getView().findViewById(R.id.sec_textview);
+		centisecText = (TextView) (TextView)getView().findViewById(R.id.centisec_textview);
 	}
 
 	@Override
@@ -31,17 +33,20 @@ public class ClockView extends Fragment {
 		return inflater.inflate(R.layout.clockview_fragment, container, false);			
 	}
 	
-	public void setLeftTime(String leftTime) {
-		this.leftText.setText(leftTime);
+	public void setHourTime(String hourTime) {
+		this.hourText.setText(hourTime);
 	}
 	
-	public void setMiddleTime(String midTime) {
-		this.middleText.setText(midTime);
+	public void setMinTime(String min) {
+		this.minText.setText(min);
 	}
 	
-	public void setRightTime(String rightTime) {
-		this.rightText.setText(rightTime);
+	public void setSecTime(String sec) {
+		this.secText.setText(sec);
 	}
 	
+	public void setCentisecTime(String sec) {
+		this.centisecText.setText(sec);
+	}
 	
 }

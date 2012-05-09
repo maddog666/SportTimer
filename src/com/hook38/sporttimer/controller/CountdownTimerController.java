@@ -237,7 +237,7 @@ public class CountdownTimerController extends ActivityController{
 	}
 	
 	private void clearTimer() {
-		setTime(0, 0, 0);
+		setTime(0, 0, 0, 0);
 		pausedTime = 0;
 		pauseTime = 0;
 	}
@@ -274,10 +274,11 @@ public class CountdownTimerController extends ActivityController{
 				return;
 			}
 			long hours = millis/(1000 * 60 * 60);
-			long mins = millis/(1000 * 60);
+			long mins = millis/(1000 * 60) % 60;
 			long secs = ((millis/1000) % 60)+1;
+			long centisecs = (millis/10) % 100;
 			//long centisecs = (countdownTime/10) % 100;
-			setTime(hours, mins, secs);
+			setTime(hours, mins, secs, centisecs);
 			handler.postDelayed(this, 100);
 		}
 		

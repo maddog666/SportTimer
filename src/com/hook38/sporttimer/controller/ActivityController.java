@@ -19,13 +19,16 @@ public abstract class ActivityController {
 	private String leftTimeString;
 	private String midTimeString;
 	private String rightTimeString;
+	private String centisecTimeString;
 	//protected Runnable Timer;
 	private ArrayList<String> list = new ArrayList<String>();
+	
 	
 	public String getTimeString() {
 		return leftTimeString + ":" 
 				+ midTimeString + ":" 
-				+ rightTimeString;
+				+ rightTimeString + ":"
+				+ centisecTimeString;
 	}
 	
 	//public ActivityController(Context context, ClockView clockView, ListView listView) {
@@ -36,19 +39,21 @@ public abstract class ActivityController {
 		this.listView = listView;
 	}
 	
-	private void setTime(String left, String mid, String right) {
-		clockView.setLeftTime(left);
-		clockView.setMiddleTime(mid);
-		clockView.setRightTime(right);
+	private void setTime(String hour, String min, String sec, String centisec) {
+		clockView.setHourTime(hour);
+		clockView.setMinTime(min);
+		clockView.setSecTime(sec);
+		clockView.setCentisecTime(centisec);
 	}
 	
-	public void setTime(long left, long mid, long right) {
+	public void setTime(long hour, long min, long sec, long centisec) {
 		NumberFormat df = NumberFormat.getInstance();
 		df.setMinimumIntegerDigits(2);
-		leftTimeString = String.valueOf(df.format(left));
-		midTimeString = String.valueOf(df.format(mid));
-		rightTimeString = String.valueOf(df.format(right));
-		this.setTime(leftTimeString, midTimeString, rightTimeString);
+		leftTimeString = String.valueOf(df.format(hour));
+		midTimeString = String.valueOf(df.format(min));
+		rightTimeString = String.valueOf(df.format(sec));
+		centisecTimeString = String.valueOf(df.format(centisec));
+		this.setTime(leftTimeString, midTimeString, rightTimeString, centisecTimeString);
 	}
 	
 	protected void addItem(String item){
