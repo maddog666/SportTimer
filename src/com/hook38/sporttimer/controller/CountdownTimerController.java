@@ -61,9 +61,17 @@ public class CountdownTimerController extends ActivityController{
 		this.loadRoutineSpinner();
 	}
 	
+	/**
+	 * Initiate of routine spinner object. Generate the default if no routine was stored in
+	 * the database.
+	 */
 	private void loadRoutineSpinner() {
-		Log.d("CountdownTimerController", "loadRoutineSpinner");
+		//Log.d("CountdownTimerController", "loadRoutineSpinner");
 		List<String> list = storeController.getRoutines();
+		//lazy initiate of spinner
+		if(list.size() < 1) {
+			list.add(getActivity().getString(R.string.default_routine_name));
+		}
 		((InteractiveListView)listView).populateSpinner(list);
 		
 	}
@@ -74,16 +82,29 @@ public class CountdownTimerController extends ActivityController{
 		storeController.close();
 	}
 	
+	/**
+	 * Save the routine in the database, given the name of the routine.
+	 * @param name Routine name.
+	 */
 	private void addRoutine(String name) {
 		storeController.storeRoutine(name);
 	}
 	
+	/**
+	 * Remove the routine in the database, given the name of the routine.
+	 * @param name Routine name.
+	 */
 	public void removeRoutine(String name) {
 		storeController.deleteRoutine(name);
 	}
 	
+	/**
+	 * Save the routine timeunits from the listview in the database, given the 
+	 * routine name.
+	 * @param routineName Routine name
+	 */
 	public void saveRoutine(String routineName) {
-		Log.d("CountdownTimerController", "saveRoutine: "+routineName);
+		//Log.d("CountdownTimerController", "saveRoutine: "+routineName);
 		storeController.storeTimerModel(timerModel, routineName);
 	}
 	
@@ -91,17 +112,8 @@ public class CountdownTimerController extends ActivityController{
 		storeController.editRoutine(oldName, newName);
 	}
 	
-	public void saveRoutineButtonClicked() {
-		this.saveRoutine(((InteractiveListView)listView).getSelectedRoutine());
-		
-	}
-	
-	public void loadRoutineButtonClicked() {
-		this.loadRoutine(((InteractiveListView)listView).getSelectedRoutine());
-	}
-	
 	public void loadRoutine(String routineName) {
-		Log.d("CountdownTimerController", "loadRoutine: "+routineName);
+		//Log.d("CountdownTimerController", "loadRoutine: "+routineName);
 		timerModel = storeController.retrieveTimerModel(routineName);
 		listView.populateList(timerModel.toStringList());
 	}
@@ -124,6 +136,7 @@ public class CountdownTimerController extends ActivityController{
 				this.editTime(data.getExtras().getInt("posi"), units);
 				break;
 			}
+			this.saveRoutine(this.getSelectedRoutine());
 		}else{
 			//handle text input
 			String text = data.getStringExtra("text");
@@ -155,10 +168,13 @@ public class CountdownTimerController extends ActivityController{
 	 */
 	private void loadListView(String text) {
 		this.loadRoutineSpinner();
-		((InteractiveListView)listView).selectSpinner(text);
+		this.selectRoutine(text);
 		this.loadRoutine();
 	}
 	
+	public void selectRoutine(String text) {
+		((InteractiveListView)listView).selectSpinner(text);
+	}
 	
 	public void addRoutineButtonClicked() {
 		Intent i = new Intent(getActivity(), TextInputActivity.class);
@@ -181,6 +197,10 @@ public class CountdownTimerController extends ActivityController{
 		case STOPPED:			
 			this.posi = 0;
 			startTimer(posi);
+			break;
+		case PAUSED:
+			
+			break;
 		}
 	}
 	
@@ -198,8 +218,24 @@ public class CountdownTimerController extends ActivityController{
 	}
 	
 	public void pauseButtonClicked() {
-		
+		switch(status) {
+		case STARTED:
+			
+			break;
+		}
 	}
+	
+	public void stopButtonClicked() {
+		switch(status) {
+		case STARTED:
+			
+			break;
+		case PAUSED:
+			
+			break;
+		}
+	}
+	
 	
 
 	
@@ -213,7 +249,7 @@ public class CountdownTimerController extends ActivityController{
 			}
 			long hours = millis/(1000 * 60 * 60);
 			long mins = millis/(1000 * 60);
-			long secs = (millis/1000) % 60;
+			long secs = ((millis/1000) % 60)+1;
 			//long centisecs = (countdownTime/10) % 100;
 			setTime(hours, mins, secs);
 			handler.postDelayed(this, 100);
@@ -293,6 +329,7 @@ public class CountdownTimerController extends ActivityController{
 	public void removeTime(int posi) {
 		timerModel.remove(posi);
 		this.updateView();
+		this.saveRoutine(this.getSelectedRoutine());
 	}
 
 	/**
@@ -334,7 +371,11 @@ public class CountdownTimerController extends ActivityController{
 	 * the routine list, given the routine selected.
 	 */
 	private void loadRoutine() {
-		this.loadRoutine(((InteractiveListView)listView).getSelectedRoutine());
+		this.loadRoutine(this.getSelectedRoutine());
+	}
+	
+	public String getSelectedRoutine() {
+		return ((InteractiveListView)listView).getSelectedRoutine();
 	}
 	
 }

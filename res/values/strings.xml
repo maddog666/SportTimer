@@ -18,9 +18,19 @@
 	<string name="default_routine_name">Untitled</string>
 	<string name="routine_prompt">Select routine</string>
 	
+	<string name="start">Start</string>
+	<string name="stop">Stop</string>
+	<string name="pause">Pause</string>
+	<string name="reset">Reset</string>
+	<string name="add_lap">Add Lap</string>
+	
+	
+	<string name="add_time">Add time</string>
 	<string name="add">Add</string>
 	<string name="edit">Edit</string>
 	<string name="remove">Remove</string>
 	
 	<string name="text_input_hint">Input text</string>
+	
+	<string name="selected_routine_key">SelectedRoutine</string>
 </resources>

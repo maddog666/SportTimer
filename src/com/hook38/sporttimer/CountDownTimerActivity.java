@@ -6,8 +6,10 @@ import com.hook38.sporttimer.view.InteractiveListView;
 import com.hook38.sporttimer.view.ListView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,8 +28,8 @@ import android.widget.Toast;
  *
  */
 public class CountDownTimerActivity extends SportTimerActivity implements OnClickListener {
-
-	
+	private String TAG = "CountDownTimerActivity";
+	public static final String PREFS_NAME = "MyPrefsFile";
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,16 +55,48 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         startButton.setOnClickListener(this);
         Button pauseButton = (Button)findViewById(R.id.pause_button);
         pauseButton.setOnClickListener(this);
-        Button restartButton = (Button)findViewById(R.id.restart_button);
-        restartButton.setOnClickListener(this);
-        Button addButton = (Button)findViewById(R.id.add_button);
-        addButton.setOnClickListener(this);
-        Button saveButton = (Button)findViewById(R.id.save_button);
-        saveButton.setOnClickListener(this);
-        Button loadButton = (Button)findViewById(R.id.load_button);
-        loadButton.setOnClickListener(this);
+        Button stopButton = (Button)findViewById(R.id.stop_button);
+        stopButton.setOnClickListener(this);
+
         
+        this.initiate(savedInstanceState);
 	}
+	
+	private void initiate(Bundle savedInstanceState) {
+		if(savedInstanceState != null) {
+			this.getController().selectRoutine(savedInstanceState.getString("selectedRoutine"));
+		}
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		String selectedRoutine =
+				settings.getString(getString(R.string.selected_routine_key), null);
+		if(selectedRoutine != null) {
+			this.getController().selectRoutine(selectedRoutine);
+		}
+	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(getString(R.string.selected_routine_key), 
+				this.getController().getSelectedRoutine());
+		editor.commit();
+	}
+	
+	/*
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		Log.d(TAG, "onSaveInstanceState");
+		outState.putString("selectedRoutine", getController().getSelectedRoutine());
+	}
+	*/
 	
 	@Override
     public void onActivityResult(int requestCode,int resultCode,Intent data) {
@@ -82,6 +116,7 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+    	super.onOptionsItemSelected(item);
     	switch(item.getItemId()) {
     	case R.id.stopwatch:
     		startActivity(new Intent(this, StopwatchActivity.class));
@@ -102,21 +137,14 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 		switch(arg0.getId()) {
-		
-		case R.id.add_button:
-			getController().addTime();
-			break;
 		case R.id.start_button:
 			getController().startButtonClicked();
 			break;
 		case R.id.pause_button:
 			getController().pauseButtonClicked();
 			break;
-		case R.id.save_button:
-			getController().saveRoutineButtonClicked();
-			break;
-		case R.id.load_button:
-			getController().loadRoutineButtonClicked();
+		case R.id.stop_button:
+			getController().stopButtonClicked();
 			break;
 		}
 	}

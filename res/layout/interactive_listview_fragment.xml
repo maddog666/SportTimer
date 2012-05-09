@@ -14,6 +14,11 @@
     	android:layout_height="wrap_content"
     	android:orientation="horizontal" >
     	<Button 
+    	    android:id="@+id/add_time_button"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="@string/add_time"/>
+    	<Button 
     	    android:id="@+id/add_routine_button"
     		android:layout_width="wrap_content"
     		android:layout_height="wrap_content"

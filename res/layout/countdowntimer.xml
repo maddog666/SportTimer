@@ -18,42 +18,22 @@
 		        android:layout_width="0sp"
 		        android:layout_height="fill_parent"
 		        android:layout_weight="1"
-		        android:text="Start" />
+		        android:text="@string/start" />
+		    
 		    <Button
 		        android:id="@+id/pause_button"
 		        android:layout_width="0sp"
 		        android:layout_height="fill_parent"
 		        android:layout_weight="1"
-		        android:text="Pause" />	
-	
-	        <Button
-		        android:id="@+id/restart_button"
+		        android:text="@string/pause" />	
+			<Button
+		        android:id="@+id/stop_button"
 		        android:layout_width="0sp"
 		        android:layout_height="fill_parent"
 		        android:layout_weight="1"
-		        android:text="Restart" />		    
+		        android:text="@string/stop" />	
+    
 	</LinearLayout>
-	<LinearLayout 
-	    android:layout_weight="1"
-    	android:layout_height="0sp"
-    	android:layout_width="fill_parent"
-    	android:orientation="horizontal">    	    
-    	<Button
-			android:id="@+id/add_button"
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:text="Add routine" />
-    	<Button
-			android:id="@+id/save_button"
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:text="Save" />
-    	<Button
-			android:id="@+id/load_button"
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:text="Load" />
-    </LinearLayout>
 	
 	<fragment android:name="com.hook38.sporttimer.view.InteractiveListView"
 	    android:id="@+id/listview_fragment"

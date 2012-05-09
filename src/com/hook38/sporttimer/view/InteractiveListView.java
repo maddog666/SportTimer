@@ -36,6 +36,8 @@ public class InteractiveListView extends ListView {
 		routine_spinner = (Spinner)getActivity().findViewById(R.id.routine_spinner);
 		routine_spinner.setOnItemSelectedListener(new SpinnerOnItemSelectedListener());
 		
+		Button addTimeButton = (Button)getActivity().findViewById(R.id.add_time_button);
+		addTimeButton.setOnClickListener(new ButtonOnClickListener());
 		Button addButton = (Button)getActivity().findViewById(R.id.add_routine_button);
 		addButton.setOnClickListener(new ButtonOnClickListener());
 		Button editButton = (Button)getActivity().findViewById(R.id.edit_routine_button);
@@ -50,6 +52,11 @@ public class InteractiveListView extends ListView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch(v.getId()){
+			case R.id.add_time_button:
+				((CountDownTimerActivity)getActivity())
+    			.getController()
+    			.addTime();
+				break;
 			case R.id.add_routine_button:
 				((CountDownTimerActivity)getActivity())
     			.getController()
