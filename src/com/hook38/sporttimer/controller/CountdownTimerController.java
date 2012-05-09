@@ -26,7 +26,8 @@ public class CountdownTimerController extends ActivityController{
 	private static final int TIME_EDIT_CODE = 2;
 	private static final int TEXT_ADD_CODE = 4;
 	private static final int TEXT_EDIT_CODE = 5;
-	private static int posi = 0;
+	private int posi = 0;
+
 	private static CountdownTimerStoreController storeController;
 	
 	private enum Status {STOPPED, 
@@ -36,7 +37,7 @@ public class CountdownTimerController extends ActivityController{
 	private Status status = Status.STOPPED;
 	
 	private MediaPlayer mp;
-	
+	private Countdown countdown = new Countdown();
 	//time which timer start
 	private long startTime;
 	//time which timer paused
@@ -199,41 +200,66 @@ public class CountdownTimerController extends ActivityController{
 			startTimer(posi);
 			break;
 		case PAUSED:
-			
+			this.restartTimer(posi);
 			break;
 		}
 	}
 	
 	private void startTimer(int posi) {
 		try{		
+			status = Status.STARTED;
 			startTime = System.currentTimeMillis();
 			TimeUnits time = timerModel.get(posi);
 			countdownTime = time.getMillisFromHour(0);
-			Countdown countdown = new Countdown();
-			status = Status.STARTED;
 			handler.post(countdown);
-		} catch (IndexOutOfBoundsException e) {
-			
+		} catch (IndexOutOfBoundsException e) {			
+			this.stopTimer();
 		}
+	}
+	
+	private void restartTimer(int posi) {
+		status = Status.STARTED;
+		this.pausedTime = System.currentTimeMillis() - this.pauseTime;
+		handler.post(countdown);
+	}
+	
+	private void stopTimer() {
+		status = Status.STOPPED;
+		handler.removeCallbacks(countdown);		
+		this.clearTimer();		
+		this.posi = 0;
+	}
+	
+	private void pauseTimer() {
+		status = Status.PAUSED;
+		this.pauseTime = System.currentTimeMillis();
+		handler.removeCallbacks(countdown);		
+	}
+	
+	private void clearTimer() {
+		setTime(0, 0, 0);
+		pausedTime = 0;
+		pauseTime = 0;
 	}
 	
 	public void pauseButtonClicked() {
 		switch(status) {
 		case STARTED:
-			
+			this.pauseTimer();
 			break;
 		}
+		
 	}
 	
 	public void stopButtonClicked() {
 		switch(status) {
 		case STARTED:
-			
-			break;
 		case PAUSED:
-			
+			this.stopTimer();
+			this.clearTimer();
 			break;
 		}
+		
 	}
 	
 	
@@ -256,10 +282,8 @@ public class CountdownTimerController extends ActivityController{
 		}
 		
 		public void onFinish(){
-			setTime(0, 0, 0);
-			beepSound();
-			status = Status.STOPPED;
-			handler.removeCallbacks(this);
+			clearTimer();
+			beepSound();			
 			posi++;
 			startTimer(posi);
 		}

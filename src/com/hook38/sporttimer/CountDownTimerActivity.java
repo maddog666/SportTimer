@@ -89,14 +89,6 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		editor.commit();
 	}
 	
-	/*
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		Log.d(TAG, "onSaveInstanceState");
-		outState.putString("selectedRoutine", getController().getSelectedRoutine());
-	}
-	*/
 	
 	@Override
     public void onActivityResult(int requestCode,int resultCode,Intent data) {
