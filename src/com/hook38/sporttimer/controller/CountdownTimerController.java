@@ -5,7 +5,6 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,7 +16,6 @@ import com.hook38.sporttimer.model.CountdownTimerModel;
 import com.hook38.sporttimer.utils.TimeUnits;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.InteractiveListView;
-import com.hook38.sporttimer.view.ListView;
 
 public class CountdownTimerController extends ActivityController{
 	private static final String TAG = "CountdownTimer";
@@ -275,11 +273,11 @@ public class CountdownTimerController extends ActivityController{
 			}
 			long hours = millis/(1000 * 60 * 60);
 			long mins = millis/(1000 * 60) % 60;
-			long secs = ((millis/1000) % 60)+1;
-			long centisecs = (millis/10) % 100;
+			long secs = ((millis/1000) % 60);
+			long centisecs = (millis/10) % 10;
 			//long centisecs = (countdownTime/10) % 100;
 			setTime(hours, mins, secs, centisecs);
-			handler.postDelayed(this, 100);
+			handler.postDelayed(this, 10);
 		}
 		
 		public void onFinish(){

@@ -52,6 +52,7 @@ public abstract class ActivityController {
 		leftTimeString = String.valueOf(df.format(hour));
 		midTimeString = String.valueOf(df.format(min));
 		rightTimeString = String.valueOf(df.format(sec));
+		df.setMinimumIntegerDigits(1);
 		centisecTimeString = String.valueOf(df.format(centisec));
 		this.setTime(leftTimeString, midTimeString, rightTimeString, centisecTimeString);
 	}
