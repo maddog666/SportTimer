@@ -8,6 +8,35 @@
 	</style>
 	
 	<style name="Title.Large" parent="@android:style/TextAppearance">	    
-	    <item name="android:textSize">40dip</item>	    	
-	</style>    
+	    <item name="android:textSize">40sp</item>	    	
+	</style>   
+	
+	
+	<!-- These are styles for the time input activity -->
+	<style name="TimeInputEntireInputLayout">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">match_parent</item>    
+		<item name="android:orientation">horizontal</item>
+		<item name="android:background">@color/black</item>
+	</style>
+	
+	<style name="TimeInputTitleTextLayout">
+	    <item name="android:orientation">horizontal</item>
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">wrap_content</item>
+	</style>
+	
+	<style name="TimeInputModifierImageLayout">
+	    <item name="android:orientation">horizontal</item>
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">50dp</item>
+	    <item name="android:padding">5dp</item>
+	</style>
+	
+	<style name="TimeInputDigitsImageLayout">
+	    <item name="android:orientation">horizontal</item>
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">80dp</item>
+	    <item name="android:padding">5dp</item>
+	</style>
 </resources>

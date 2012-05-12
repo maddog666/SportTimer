@@ -18,6 +18,10 @@
 	<string name="default_routine_name">Untitled</string>
 	<string name="routine_prompt">Select routine</string>
 	
+	<string name="hour">Hour</string>
+	<string name="min">Minute</string>
+	<string name="sec">Second</string>
+	
 	<string name="start">Start</string>
 	<string name="stop">Stop</string>
 	<string name="pause">Pause</string>

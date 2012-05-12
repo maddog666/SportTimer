@@ -1,67 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:padding="5sp">
+    android:padding="5dp">
     <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#33FF77">
+        android:id="@+id/time_input_time_layout"
+        style="@style/TimeInputEntireInputLayout">
 	    <LinearLayout 
-	        android:layout_width="0sp"
-	        android:layout_height="match_parent"
-	        android:orientation="vertical"
-	        android:layout_weight="1"
-	        android:background="#222266">
-	    	<EditText
-	    	    android:id="@+id/time_input_left"
-	    	    android:inputType="number" 
-	    	    android:layout_height="match_parent"
-	    	    android:layout_width="match_parent"
-	    	    android:text="0"/>    
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:orientation="vertical">
+
+	        <LinearLayout 
+	            style="@style/TimeInputTitleTextLayout">
+	        	<TextView
+	        	    android:id="@+id/time_input_hour_label"
+	        	    android:layout_width="match_parent"
+	        	    android:layout_height="wrap_content"
+	        	    android:gravity="center"
+	        	    android:text="@string/hour" />
+			</LinearLayout>
+			
+        	<LinearLayout
+        	   	style="@style/TimeInputModifierImageLayout">
+	        	<ImageView
+	        	    android:id="@+id/time_input_hour_plus_image"
+	        	    android:layout_width="match_parent"
+	        	    android:layout_height="match_parent"
+	        	    android:src="@drawable/up_small" />
+			</LinearLayout>
+			
+        	<LinearLayout
+        	   	style="@style/TimeInputDigitsImageLayout">
+        	<ImageView
+        	    android:id="@+id/time_input_hour_image"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:src="@drawable/digit0" />
+        	</LinearLayout>
+
+        	<LinearLayout
+        	   	style="@style/TimeInputModifierImageLayout">
+        	<ImageView
+            	android:id="@+id/time_input_hour_minus_image"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:src="@drawable/down_small"/>
+            </LinearLayout>  
 	        
 	    </LinearLayout>
+	    
         <LinearLayout 
-	        android:layout_width="0sp"
-	        android:layout_height="match_parent"
-	        android:orientation="vertical"
-	        android:layout_weight="1"
-	        android:background="#226622">
-	    	<EditText
-	    	    android:id="@+id/time_input_middle"
-	    	    android:inputType="number" 
-	    	    android:layout_height="match_parent"
-	    	    android:layout_width="match_parent"
-	    	    android:text="0"/>
-	    	
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:orientation="vertical">
+	        <LinearLayout 
+	            style="@style/TimeInputTitleTextLayout">
+		        <TextView
+		            android:id="@+id/time_input_min_label"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@string/min" />
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	        	   	style="@style/TimeInputModifierImageLayout">
+	        <ImageView
+	            android:id="@+id/time_input_min_plus_image"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:src="@drawable/up_small" />
+	        </LinearLayout>
+
+	        <LinearLayout
+	            style="@style/TimeInputDigitsImageLayout">
+	        	<ImageView
+	            	android:id="@+id/time_input_left_min_image"
+	            	android:layout_width="0dp"
+	            	android:layout_weight="1"
+	            	android:layout_height="wrap_content"
+	            	android:src="@drawable/digit0" android:layout_gravity="top"/>
+	        	<ImageView
+	            	android:id="@+id/time_input_right_min_image"
+	            	android:layout_weight="1"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:src="@drawable/digit0"/>
+			</LinearLayout>
+			
+	        <LinearLayout
+	        	   	style="@style/TimeInputModifierImageLayout">
+        	<ImageView
+            	android:id="@+id/time_input_min_minus_image"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:src="@drawable/down_small"/>
+        	</LinearLayout>
+
 	    </LinearLayout>
         
         <LinearLayout 
-	        android:layout_width="0sp"
-	        android:layout_height="match_parent"
-	        android:orientation="vertical"
-	        android:layout_weight="1"
-	        android:background="#662222">
-	    	<EditText
-	    	    android:id="@+id/time_input_right"
-	    	    android:inputType="number" 
-	    	    android:layout_height="match_parent"
-	    	    android:layout_width="match_parent"
-	    	    android:text="0"/>
-	    	
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:orientation="vertical">
+	        <LinearLayout 
+	            style="@style/TimeInputTitleTextLayout">
+		        <TextView
+		            android:id="@+id/time_input_sec_label"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@string/sec" />
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	        	   	style="@style/TimeInputModifierImageLayout">
+	        <ImageView
+	            android:id="@+id/time_input_sec_plus_image"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:src="@drawable/up_small" />
+			</LinearLayout>
+			
+	        <LinearLayout
+	            style="@style/TimeInputDigitsImageLayout">
+	        	<ImageView
+	            	android:id="@+id/time_input_left_sec_image"
+	            	android:layout_weight="1"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:src="@drawable/digit0"/>
+	        	<ImageView
+	            	android:id="@+id/time_input_right_sec_image"
+	            	android:layout_width="0dp"
+	            	android:layout_weight="1"
+	            	android:layout_height="wrap_content"
+	            	android:src="@drawable/digit0"/>
+			</LinearLayout>
+			
+	        <LinearLayout
+	        	   	style="@style/TimeInputModifierImageLayout">
+        	<ImageView
+            	android:id="@+id/time_input_sec_minus_image"
+            	android:layout_width="match_parent"
+            	android:layout_height="match_parent"
+            	android:src="@drawable/down_small"/>
+        	</LinearLayout>
+
 	    </LinearLayout>
 	</LinearLayout>
-	<LinearLayout 
-	    android:layout_width="wrap_content"
+	<RelativeLayout 
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
-	    android:padding="5sp">
+	    android:padding="5sp"
+	    android:layout_below="@id/time_input_time_layout">
         <Button 
             android:id="@+id/time_input_button"
             android:layout_height="wrap_content"
     	 	android:layout_width="wrap_content"
-    	 	android:text="@string/enter_button"/>
-	</LinearLayout>
-</LinearLayout>
+    	 	android:text="@string/enter_button" 
+    	 	android:layout_alignParentRight="true"/>
+	</RelativeLayout>
+</RelativeLayout>

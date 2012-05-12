@@ -33,12 +33,14 @@
         <activity
             android:name=".TimeInputActivity"
             android:label="@string/time_input_title"
+            android:excludeFromRecents="true"
             android:theme="@android:style/Theme.Dialog">            
         </activity>
         
                 <activity
             android:name=".TextInputActivity"
             android:label="@string/text_input_title"
+            android:excludeFromRecents="true"
             android:theme="@android:style/Theme.Dialog">            
         </activity>
             
