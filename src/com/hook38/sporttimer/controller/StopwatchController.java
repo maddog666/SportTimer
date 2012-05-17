@@ -111,8 +111,7 @@ public class StopwatchController extends ActivityController {
 	}
 	
 	
-	private Runnable Timer = new Runnable() {
-		//private Handler handler = new Handler();		
+	private Runnable Timer = new Runnable() {		
 		public void run() {
 			long spentTime = System.currentTimeMillis() - startTime - pausedTime;		
 			long hours = spentTime/(1000 * 60 * 60);
@@ -120,8 +119,8 @@ public class StopwatchController extends ActivityController {
 			long secs = (spentTime/1000) % 60;
 			long centisecs = (spentTime/10) % 10;
 			setTime(hours, mins, secs, centisecs);
-			handler.removeCallbacks(Timer);
-			handler.postDelayed(this, 10);
+			handler.removeCallbacks(this);
+			handler.postDelayed(this, 40);
 		}
 	};
 

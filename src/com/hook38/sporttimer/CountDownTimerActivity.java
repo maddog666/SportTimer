@@ -89,6 +89,11 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		editor.commit();
 	}
 	
+	@Override 
+	public void onStop() {
+		super.onStop();
+		controller.close();
+	}
 	
 	@Override
     public void onActivityResult(int requestCode,int resultCode,Intent data) {

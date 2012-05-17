@@ -93,12 +93,12 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
 		}
 	}
 	
+	
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onStop() {
+		super.onStop();
 		controller.close();
 	}
-	
 	public StopwatchController getController(){
 		return (StopwatchController)controller;
 	}

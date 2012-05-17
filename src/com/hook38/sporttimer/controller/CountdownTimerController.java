@@ -35,7 +35,7 @@ public class CountdownTimerController extends ActivityController{
 	private Status status = Status.STOPPED;
 	
 	private MediaPlayer mp;
-	//private Countdown countdown = new Countdown();
+
 	//time which timer start
 	private long startTime;
 	//time which timer paused
@@ -79,6 +79,9 @@ public class CountdownTimerController extends ActivityController{
 	public void close() {
 		// TODO Auto-generated method stub
 		storeController.close();
+		if(handler != null) {
+			handler.removeCallbacks(Countdown);
+		}
 	}
 	
 	/**
@@ -264,9 +267,7 @@ public class CountdownTimerController extends ActivityController{
 		return countdownTime - (System.currentTimeMillis() - startTime) + pausedTime;
 	}
 
-	
-	private Runnable Countdown = new Runnable() {
-		//private Handler handler = new Handler();		
+	private Runnable Countdown = new Runnable() {	
 		public void run() {
 			long millis = getTimeLeft();
 			if(millis <=0) {
@@ -279,8 +280,8 @@ public class CountdownTimerController extends ActivityController{
 			long centisecs = (millis/10) % 10;
 			//long centisecs = (countdownTime/10) % 100;
 			setTime(hours, mins, secs, centisecs);
-			handler.removeCallbacks(Countdown);
-			handler.postDelayed(this, 10);
+			handler.removeCallbacks(this);
+			handler.postDelayed(this, 40);
 		}
 		
 		public void onFinish(){
