@@ -60,20 +60,7 @@ public class CountdownTimerController extends ActivityController{
 		this.loadRoutineSpinner();
 	}
 	
-	/**
-	 * Initiate of routine spinner object. Generate the default if no routine was stored in
-	 * the database.
-	 */
-	private void loadRoutineSpinner() {
-		//Log.d("CountdownTimerController", "loadRoutineSpinner");
-		List<String> list = storeController.getRoutines();
-		//lazy initiate of spinner
-		if(list.size() < 1) {
-			list.add(getActivity().getString(R.string.default_routine_name));
-		}
-		((InteractiveListView)listView).populateSpinner(list);
-		
-	}
+	
 
 	@Override
 	public void close() {
@@ -89,6 +76,7 @@ public class CountdownTimerController extends ActivityController{
 	 * @param name Routine name.
 	 */
 	private void addRoutine(String name) {
+		Log.d(TAG, "addRoutine");
 		storeController.storeRoutine(name);
 	}
 	
@@ -115,11 +103,16 @@ public class CountdownTimerController extends ActivityController{
 	}
 	
 	public void loadRoutine(String routineName) {
-		//Log.d("CountdownTimerController", "loadRoutine: "+routineName);
+		Log.d(TAG, "loadRoutine: "+routineName);
 		timerModel = storeController.retrieveTimerModel(routineName);
 		listView.populateList(timerModel.toStringList());
 	}
 	
+	/**
+	 * Handle both time and text input from external activity
+	 * @param requestCode
+	 * @param data
+	 */
 	public void handleInput(int requestCode, Intent data) {
 		if(requestCode == CountdownTimerController.TIME_ADD_CODE ||
 				requestCode == CountdownTimerController.TIME_EDIT_CODE) {
@@ -152,6 +145,7 @@ public class CountdownTimerController extends ActivityController{
 				this.addRoutine(text);
 				//focus to the added routine
 				this.loadListView(text);
+				Log.d(TAG, "finished handle input");
 				break;
 			case(CountdownTimerController.TEXT_EDIT_CODE):
 				String originalText = data.getStringExtra("originaltext");
@@ -169,12 +163,30 @@ public class CountdownTimerController extends ActivityController{
 	 * @param text name of the intentional selection routine.
 	 */
 	private void loadListView(String text) {
+		Log.d(TAG, "loadListView "+text);
 		this.loadRoutineSpinner();
 		this.selectRoutine(text);
 		this.loadRoutine();
 	}
 	
+	/**
+	 * Initiate of routine spinner object. Generate the default if no routine was stored in
+	 * the database.
+	 */
+	private void loadRoutineSpinner() {
+		//Log.d("CountdownTimerController", "loadRoutineSpinner");
+		Log.d(TAG, "loadRoutineSpinner");
+		List<String> list = storeController.getRoutines();
+		//lazy initiate of spinner
+		if(list.size() < 1) {
+			list.add(getActivity().getString(R.string.default_routine_name));
+		}
+		((InteractiveListView)listView).populateSpinner(list);
+		
+	}
+	
 	public void selectRoutine(String text) {
+		Log.d(TAG, "selectRoutine "+text);
 		((InteractiveListView)listView).selectSpinner(text);
 	}
 	
@@ -398,10 +410,12 @@ public class CountdownTimerController extends ActivityController{
 	 * the routine list, given the routine selected.
 	 */
 	private void loadRoutine() {
+		Log.d(TAG, "loadRoutine");
 		this.loadRoutine(this.getSelectedRoutine());
 	}
 	
 	public String getSelectedRoutine() {
+		Log.d(TAG, "getSelectedRoutine");
 		return ((InteractiveListView)listView).getSelectedRoutine();
 	}
 	

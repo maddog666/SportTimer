@@ -98,7 +98,12 @@ public class InteractiveListView extends ListView {
 	 * @return Name of the selected spinner
 	 */
 	public String getSelectedRoutine() {
-		return routine_spinner.getSelectedItem().toString();
+		try {
+			return routine_spinner.getSelectedItem().toString();
+		} catch (IndexOutOfBoundsException e) {
+			
+			return routine_spinner.getItemAtPosition(0).toString();
+		}
 	}
 	
 	private class ListOnItemLongClickListener implements OnItemLongClickListener {

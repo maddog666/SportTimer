@@ -51,7 +51,6 @@ public class CountdownTimerStoreController {
 	 */
 	public void storeTimerModel(CountdownTimerModel model, String routineName) {	
 		long routineId = this.storeRoutine(routineName);
-		Log.d("CountdownTimerStoreController", routineName+" "+routineId);
 		this.deleteTimeUnitsByRoutineId(routineId);
 		for(int i=model.size()-1; i>=0; i--) {
 			this.storeTimeUnit(model.get(i).toString(), i, routineId);
@@ -81,7 +80,6 @@ public class CountdownTimerStoreController {
 	}
 	
 	public CountdownTimerModel retrieveTimerModel(String routineName) {
-		Log.d("CountdownTimerStoreController", "retrieveTimerModel: "+routineName);
 		RoutineSQL storedRoutine = this.retrieveStoredRoutine(routineName);
 		
 		CountdownTimerModel model = new CountdownTimerModel();
@@ -106,8 +104,6 @@ public class CountdownTimerStoreController {
 
 		RoutineSQL storedRoutine = this.retrieveStoredRoutine(routineName);
 		if(storedRoutine == null) {
-			Log.d("CountdownTimerStoreController", "Routine does not exist");
-
 			//No routine with the given name, store the routine.
 			RoutineSQL routine = new RoutineSQL(null, routineName);
 			routineDao.insert(routine);
@@ -119,7 +115,6 @@ public class CountdownTimerStoreController {
 	}
 	
 	private long storeTimeUnit(String unitString, int order, long routineId) {
-		Log.d("CountdownTimerStoreController", "storeTimeUnit: "+unitString+" "+order+" "+routineId);
 		TimeUnitSQL storedTimeUnit = this.retrieveStoredTimeUnits(routineId, order);
 		if(storedTimeUnit == null) {
 			
@@ -127,21 +122,18 @@ public class CountdownTimerStoreController {
 			//Store a new one
 			TimeUnitSQL unit = new TimeUnitSQL(null, unitString, order, routineId);
 			unitDao.insert(unit);
-			Log.d("CountdownTimerStoreController", "No unit stored, stored unit with id: "+unit.getId());
 			return unit.getId();
 		}else{
 			//Time time units with the given routine Id at that position had been stored
 			//Update to the new one
 			storedTimeUnit.setTimeunit(unitString);
 			unitDao.update(storedTimeUnit);
-			Log.d("CountdownTimerStoreController", "Unit existed, with id: "+storedTimeUnit.getId());
 			return storedTimeUnit.getId();
 		}
 	}
 	
 	
 	private List<TimeUnitSQL> retrieveStoredTimeUnits(long routineId) {
-		Log.d("CountdownTimerStoreController", "retrieveStoredTimeUnits, routineId: "+routineId);
 		return unitDao.queryBuilder()
 				.where(com.hook38.sporttimer.model.sql
 						.TimeUnitSQLDao.Properties.RoutineId
@@ -169,7 +161,6 @@ public class CountdownTimerStoreController {
 	 * @return
 	 */
 	private RoutineSQL retrieveStoredRoutine (String routineName) { 
-		Log.d("CountdownTimerStoreController", "retrieveStoredRoutines: "+routineName);
 		return routineDao.queryBuilder()
 			.where(com.hook38.sporttimer.model.sql
 					.RoutineSQLDao.Properties.Name

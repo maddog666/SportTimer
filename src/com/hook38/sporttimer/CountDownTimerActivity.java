@@ -63,6 +63,7 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	}
 	
 	private void initiate(Bundle savedInstanceState) {
+		Log.d(TAG, "initiate");
 		if(savedInstanceState != null) {
 			this.getController().selectRoutine(savedInstanceState.getString("selectedRoutine"));
 		}
@@ -71,6 +72,7 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	@Override
 	public void onResume(){
 		super.onResume();
+		Log.d(TAG, "onResume");
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		String selectedRoutine =
 				settings.getString(getString(R.string.selected_routine_key), null);
@@ -79,14 +81,18 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		}
 	}
 	
-	@Override
-	public void onPause(){
-		super.onPause();
+	private void setPreference() {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(getString(R.string.selected_routine_key), 
 				this.getController().getSelectedRoutine());
 		editor.commit();
+	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		this.setPreference();
 	}
 	
 	@Override 
@@ -100,6 +106,7 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == RESULT_OK){
 			getController().handleInput(requestCode, data);
+			this.setPreference();
 		}
     }
 	
