@@ -4,6 +4,7 @@ package com.hook38.sporttimer.view;
 import java.util.List;
 
 import com.hook38.sporttimer.R;
+import com.hook38.sporttimer.utils.DoubleTextListAdapter;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -34,12 +35,10 @@ public class ListView extends ListFragment {
 	
 	
 	
-	public void populateList(List<String> list) {
-		ListAdapter myListAdapter = new ArrayAdapter<String> (
-				getActivity(), 
-				android.R.layout.simple_list_item_1,
-				list
-		);
+	public void populateList(List<String> list) {		
+		DoubleTextListAdapter myListAdapter = 
+				new DoubleTextListAdapter(getActivity(), list);
+				
 		setListAdapter(myListAdapter);
 	}
 	

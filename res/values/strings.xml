@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, SportTimerActivity!</string>
+    <string name="stopwatch_name">Stopwatch</string>
+    <string name="countdown_clock_name">Countdown Clock</string>
     <string name="app_name">SportTimer</string>
 	<string name="settings_label">Setting</string>
 	<string name="stopwatch_label">StopWatch</string>

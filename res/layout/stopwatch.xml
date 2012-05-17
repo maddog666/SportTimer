@@ -2,13 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/ghost_white"
+    android:padding="5dp">
 
-	<fragment android:name="com.hook38.sporttimer.view.ClockView"
-    	android:id="@+id/clock_fragment"
-    	android:layout_weight="3"
+    <LinearLayout 
+	    android:layout_weight="3"
     	android:layout_height="0sp"
-    	android:layout_width="fill_parent"/>
+    	android:layout_width="fill_parent"
+    	android:orientation="horizontal"
+    	android:padding="5dp">    
+		<fragment android:name="com.hook38.sporttimer.view.ClockView"
+	    	android:id="@+id/clock_fragment"
+	    	android:layout_height="fill_parent"
+	    	android:layout_width="fill_parent"/>
+	</LinearLayout>
 	<LinearLayout 
 	    android:layout_weight="1"
     	android:layout_height="0sp"
@@ -39,9 +47,16 @@
 		        android:layout_weight="1"
 		        android:text="@string/reset" />		    
 	</LinearLayout>
+	<LinearLayout 
+	    android:layout_weight="5"
+    	android:layout_height="0sp"
+    	android:layout_width="fill_parent"
+    	android:orientation="horizontal"
+    	android:background="@color/cornsilk3"
+    	android:padding="5dp">    
 	<fragment android:name="com.hook38.sporttimer.view.ListView"
 	    android:id="@+id/listview_fragment"
-	    android:layout_weight="5"
-	    android:layout_height="0dp"
+	    android:layout_height="fill_parent"
 	    android:layout_width="fill_parent" />
+	</LinearLayout>
 </LinearLayout>

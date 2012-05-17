@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hook38.sporttimer.CountDownTimerActivity;
 import com.hook38.sporttimer.R;
+import com.hook38.sporttimer.utils.DoubleTextListAdapter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -167,5 +168,17 @@ public class InteractiveListView extends ListView {
 		
 	}
 	
+	@Override
+	public void populateList(List<String> list) {		
+		DoubleTextListAdapter myListAdapter = 
+				new DoubleTextListAdapter(getActivity(), list) {
+			@Override
+			public String getPositionCount(int position) {
+				return Integer.toString(position + 1);
+			}
+		};
+				
+		setListAdapter(myListAdapter);
+	}
 	
 }
