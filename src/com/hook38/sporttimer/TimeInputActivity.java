@@ -6,19 +6,34 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-public class TimeInputActivity extends Activity implements OnClickListener {
-	private EditText hourInput, minuteInput, secondInput;	
+public class TimeInputActivity extends Activity implements OnClickListener, 
+		OnTouchListener, OnGestureListener{
 	private int hour, min, sec;
 	private ImageView hourImage, minLeftImage, minRightImage, secLeftImage,
 		secRightImage;
 
+	/**
+	 * The name prefix of the digit graphic files.
+	 */
 	private static String DIGIT_FILE_NAME = "digit";
 	
+	/**
+	 * The increment speed of timer on long press.
+	 */
+	private static long INCREMENTAL_SPEED = 100;
+	
+	/**
+	 * Allowed maximum and minimum input time.
+	 */
 	private static int HOUR_MAX = 9;
 	private static int HOUR_MIN = 0;
 	private static int MIN_MAX = 59;
@@ -26,6 +41,19 @@ public class TimeInputActivity extends Activity implements OnClickListener {
 	private static int SEC_MAX = 59;
 	private static int SEC_MIN = 0;
 	
+	private  GestureDetector mGestureDetector; 
+	/**
+	 * The item that is being clicked, currently only handle up or down 
+	 * arrows ImageView
+	 */
+	private View touchItem;
+	/**
+	 * A runnable item for handling long press number incremental
+	 */
+	private Handler mHandler;
+	/**
+	 * The position of the TimeUnit in the timelist that is being modified.
+	 */
 	private int posi = 0;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,18 +67,27 @@ public class TimeInputActivity extends Activity implements OnClickListener {
         secLeftImage= (ImageView)findViewById(R.id.time_input_left_sec_image);
         secRightImage= (ImageView)findViewById(R.id.time_input_right_sec_image);
         
+        mGestureDetector =  new  GestureDetector(this);       
+        mGestureDetector.setIsLongpressEnabled(true);        
+        
         ImageView hourUpImage = (ImageView)findViewById(R.id.time_input_hour_plus_image);
         hourUpImage.setOnClickListener(this);
+        hourUpImage.setOnTouchListener(this);
         ImageView hourDownImage = (ImageView)findViewById(R.id.time_input_hour_minus_image);
         hourDownImage.setOnClickListener(this);
+        hourDownImage.setOnTouchListener(this);
         ImageView minUpImage = (ImageView)findViewById(R.id.time_input_min_plus_image);
         minUpImage.setOnClickListener(this);
+        minUpImage.setOnTouchListener(this);
         ImageView minDownImage = (ImageView)findViewById(R.id.time_input_min_minus_image);
         minDownImage.setOnClickListener(this);
+        minDownImage.setOnTouchListener(this);
         ImageView secUpImage = (ImageView)findViewById(R.id.time_input_sec_plus_image);
         secUpImage.setOnClickListener(this);
+        secUpImage.setOnTouchListener(this);
         ImageView secDownImage = (ImageView)findViewById(R.id.time_input_sec_minus_image);
         secDownImage.setOnClickListener(this);
+        secDownImage.setOnTouchListener(this);
         //hourInput = (EditText)findViewById(R.id.time_input_left);
         //minuteInput = (EditText)findViewById(R.id.time_input_middle);
         //secondInput = (EditText)findViewById(R.id.time_input_right);
@@ -71,6 +108,7 @@ public class TimeInputActivity extends Activity implements OnClickListener {
         Button button = (Button)findViewById(R.id.time_input_button);
         button.setOnClickListener(this);
 	}
+
 
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -198,4 +236,113 @@ public class TimeInputActivity extends Activity implements OnClickListener {
 		int id = this.getDigitFile(this.getFileFromDigit(i));
 		return getResources().getDrawable(id);
 	}
+
+
+
+	public boolean onDown(MotionEvent e) {
+		// TODO Auto-generated method stub
+		switch(touchItem.getId()){
+		case(R.id.time_input_hour_plus_image):
+			this.increaseHour();
+			break;
+		case(R.id.time_input_hour_minus_image):
+			this.decreaseHour();
+			break;
+		case(R.id.time_input_min_plus_image):
+			this.increaseMin();
+			break;
+		case(R.id.time_input_min_minus_image):
+			this.decreaseMin();
+			break;
+		case(R.id.time_input_sec_plus_image):
+			this.increaseSec();
+			break;
+		case(R.id.time_input_sec_minus_image):
+			this.decreaseSec();
+			break;
+		}
+		return true;
+	}
+
+
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public void onLongPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+		if(mHandler == null) {
+			mHandler = new Handler();
+		}
+		mHandler.removeCallbacks(mRunnable);
+		mHandler.post(mRunnable);
+	}
+
+
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public void onShowPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public boolean onSingleTapUp(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		if(event.getAction() == MotionEvent.ACTION_DOWN){
+			this.touchItem = v;
+			return mGestureDetector.onTouchEvent(event);
+		} else if(event.getAction() == MotionEvent.ACTION_UP){
+			this.touchItem = null;
+			//stop counting thread
+			if(mHandler != null) {
+				mHandler.removeCallbacks(mRunnable);
+			}
+			return true;
+		} 
+		return true;
+	}
+
+	private final Runnable mRunnable = new Runnable() {
+		public void run() {
+			if(touchItem != null) {
+				switch(touchItem.getId()){
+				case(R.id.time_input_hour_plus_image):
+					increaseHour();
+					break;
+				case(R.id.time_input_hour_minus_image):
+					decreaseHour();
+					break;
+				case(R.id.time_input_min_plus_image):
+					increaseMin();
+					break;
+				case(R.id.time_input_min_minus_image):
+					decreaseMin();
+					break;
+				case(R.id.time_input_sec_plus_image):
+					increaseSec();
+					break;
+				case(R.id.time_input_sec_minus_image):
+					decreaseSec();
+					break;
+				}
+				mHandler.postDelayed(this, INCREMENTAL_SPEED);
+			}
+		}
+	};
+
 }

@@ -120,6 +120,7 @@ public class StopwatchController extends ActivityController {
 			long secs = (spentTime/1000) % 60;
 			long centisecs = (spentTime/10) % 10;
 			setTime(hours, mins, secs, centisecs);
+			handler.removeCallbacks(Timer);
 			handler.postDelayed(this, 10);
 		}
 	};

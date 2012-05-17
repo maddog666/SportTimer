@@ -35,7 +35,7 @@ public class CountdownTimerController extends ActivityController{
 	private Status status = Status.STOPPED;
 	
 	private MediaPlayer mp;
-	private Countdown countdown = new Countdown();
+	//private Countdown countdown = new Countdown();
 	//time which timer start
 	private long startTime;
 	//time which timer paused
@@ -209,7 +209,7 @@ public class CountdownTimerController extends ActivityController{
 			startTime = System.currentTimeMillis();
 			TimeUnits time = timerModel.get(posi);
 			countdownTime = time.getMillisFromHour(0);
-			handler.post(countdown);
+			handler.post(Countdown);
 		} catch (IndexOutOfBoundsException e) {			
 			this.stopTimer();
 		}
@@ -218,12 +218,12 @@ public class CountdownTimerController extends ActivityController{
 	private void restartTimer(int posi) {
 		status = Status.STARTED;
 		this.pausedTime = System.currentTimeMillis() - this.pauseTime;
-		handler.post(countdown);
+		handler.post(Countdown);
 	}
 	
 	private void stopTimer() {
 		status = Status.STOPPED;
-		handler.removeCallbacks(countdown);		
+		handler.removeCallbacks(Countdown);		
 		this.clearTimer();		
 		this.posi = 0;
 	}
@@ -231,7 +231,7 @@ public class CountdownTimerController extends ActivityController{
 	private void pauseTimer() {
 		status = Status.PAUSED;
 		this.pauseTime = System.currentTimeMillis();
-		handler.removeCallbacks(countdown);		
+		handler.removeCallbacks(Countdown);		
 	}
 	
 	private void clearTimer() {
@@ -260,13 +260,15 @@ public class CountdownTimerController extends ActivityController{
 		
 	}
 	
-	
+	public long getTimeLeft() {
+		return countdownTime - (System.currentTimeMillis() - startTime) + pausedTime;
+	}
 
 	
-	private class Countdown implements Runnable {
+	private Runnable Countdown = new Runnable() {
 		//private Handler handler = new Handler();		
 		public void run() {
-			long millis = countdownTime - (System.currentTimeMillis() - startTime) + pausedTime;
+			long millis = getTimeLeft();
 			if(millis <=0) {
 				onFinish();
 				return;
@@ -277,6 +279,7 @@ public class CountdownTimerController extends ActivityController{
 			long centisecs = (millis/10) % 10;
 			//long centisecs = (countdownTime/10) % 100;
 			setTime(hours, mins, secs, centisecs);
+			handler.removeCallbacks(Countdown);
 			handler.postDelayed(this, 10);
 		}
 		
