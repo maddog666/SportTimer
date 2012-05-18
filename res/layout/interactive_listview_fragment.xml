@@ -5,38 +5,53 @@
     android:orientation="vertical"
     android:padding="5sp"
     android:background="@color/white" >
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/interactive_textview_title"
+        style="@style/interactive_textview_title"/>
     <Spinner
         android:id="@+id/routine_spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/routine_prompt"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="horizontal" >
-    	<Button 
-    	    android:id="@+id/add_time_button"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:text="@string/add_time"/>
+    	
     	<Button 
     	    android:id="@+id/add_routine_button"
     		android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
-    		android:text="@string/add"/>
+    		android:layout_alignParentLeft="true"
     		
+    		android:text="@string/add"/>
     	<Button
     	    android:id="@+id/edit_routine_button" 
     		android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
+    		android:layout_toRightOf="@id/add_routine_button"
+    		android:layout_alignTop="@id/add_routine_button"
     		android:text="@string/edit"/>
     	<Button 
     	    android:id="@+id/remove_routine_button"
     		android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
+    		android:layout_toRightOf="@id/edit_routine_button"
+    		android:layout_alignTop="@id/edit_routine_button"
     		android:text="@string/remove"/>
+    	
+    	<Button 
+    	    android:id="@+id/add_time_button"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_alignParentRight="true"
+    		android:text="@string/add_time"/>
+    	
+    	
     		
-    </LinearLayout>
+    </RelativeLayout>
     <ListView android:id="@id/android:list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"        

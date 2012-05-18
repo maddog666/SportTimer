@@ -19,7 +19,6 @@ import com.hook38.sporttimer.view.InteractiveListView;
 
 public class CountdownTimerController extends ActivityController{
 	private static final String TAG = "CountdownTimer";
-	private static final String ROUTINE_LIST = "RoutineList";
 	private static final int TIME_ADD_CODE = 1;
 	private static final int TIME_EDIT_CODE = 2;
 	private static final int TEXT_ADD_CODE = 4;
@@ -34,15 +33,14 @@ public class CountdownTimerController extends ActivityController{
 		
 	private Status status = Status.STOPPED;
 	
-	private MediaPlayer mp;
-
+	
+	private SoundController soundController;
 	//time which timer start
 	private long startTime;
 	//time which timer paused
 	private long pauseTime;
 	//total summed paused time (paused time - restart time)
 	private long pausedTime = 0;
-	private long stopTime;
 	//time left on the countdown clock
 	private long countdownTime;
 	private Handler handler = new Handler(); 
@@ -53,6 +51,8 @@ public class CountdownTimerController extends ActivityController{
 		// TODO Auto-generated constructor stub
 		this.timerModel = new CountdownTimerModel();
 		storeController  = new CountdownTimerStoreController(activity);
+		soundController = new SoundController(activity);
+				
 	}
 	
 	@Override
@@ -66,6 +66,7 @@ public class CountdownTimerController extends ActivityController{
 	public void close() {
 		// TODO Auto-generated method stub
 		storeController.close();
+		soundController.close();
 		if(handler != null) {
 			handler.removeCallbacks(Countdown);
 		}
@@ -76,7 +77,6 @@ public class CountdownTimerController extends ActivityController{
 	 * @param name Routine name.
 	 */
 	private void addRoutine(String name) {
-		Log.d(TAG, "addRoutine");
 		storeController.storeRoutine(name);
 	}
 	
@@ -94,7 +94,6 @@ public class CountdownTimerController extends ActivityController{
 	 * @param routineName Routine name
 	 */
 	public void saveRoutine(String routineName) {
-		//Log.d("CountdownTimerController", "saveRoutine: "+routineName);
 		storeController.storeTimerModel(timerModel, routineName);
 	}
 	
@@ -103,7 +102,6 @@ public class CountdownTimerController extends ActivityController{
 	}
 	
 	public void loadRoutine(String routineName) {
-		Log.d(TAG, "loadRoutine: "+routineName);
 		timerModel = storeController.retrieveTimerModel(routineName);
 		listView.populateList(timerModel.toStringList());
 	}
@@ -163,7 +161,6 @@ public class CountdownTimerController extends ActivityController{
 	 * @param text name of the intentional selection routine.
 	 */
 	private void loadListView(String text) {
-		Log.d(TAG, "loadListView "+text);
 		this.loadRoutineSpinner();
 		this.selectRoutine(text);
 		this.loadRoutine();
@@ -174,8 +171,6 @@ public class CountdownTimerController extends ActivityController{
 	 * the database.
 	 */
 	private void loadRoutineSpinner() {
-		//Log.d("CountdownTimerController", "loadRoutineSpinner");
-		Log.d(TAG, "loadRoutineSpinner");
 		List<String> list = storeController.getRoutines();
 		//lazy initiate of spinner
 		if(list.size() < 1) {
@@ -240,6 +235,7 @@ public class CountdownTimerController extends ActivityController{
 		status = Status.STOPPED;
 		handler.removeCallbacks(Countdown);		
 		this.clearTimer();		
+		soundController.finishSound();
 		this.posi = 0;
 	}
 	
@@ -298,20 +294,14 @@ public class CountdownTimerController extends ActivityController{
 		
 		public void onFinish(){
 			clearTimer();
-			beepSound();			
+			soundController.intervalSound();			
 			posi++;
 			startTimer(posi);
 		}
 	};
 
-	private void beepSound(){
-		int resid = R.raw.beep;
-   	 	if(mp!=null) {
-   	 		mp.release();
-   	 	}
-   	 	mp = MediaPlayer.create(getActivity(), resid);
-   	 	mp.start();  	 
-	}
+
+	
 	
 	/**
 	 * Update the listView, that reflect the new routines. 
@@ -410,12 +400,10 @@ public class CountdownTimerController extends ActivityController{
 	 * the routine list, given the routine selected.
 	 */
 	private void loadRoutine() {
-		Log.d(TAG, "loadRoutine");
 		this.loadRoutine(this.getSelectedRoutine());
 	}
 	
 	public String getSelectedRoutine() {
-		Log.d(TAG, "getSelectedRoutine");
 		return ((InteractiveListView)listView).getSelectedRoutine();
 	}
 	

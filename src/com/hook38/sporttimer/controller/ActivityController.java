@@ -31,8 +31,8 @@ public abstract class ActivityController {
 				+ centisecTimeString;
 	}
 	
-	//public ActivityController(Context context, ClockView clockView, ListView listView) {
-		public ActivityController(Activity activity, ClockView clockView, ListView listView) {
+
+	public ActivityController(Activity activity, ClockView clockView, ListView listView) {
 		this.clockView = clockView;
 		//this.context = context;
 		this.activity = activity;
@@ -49,10 +49,11 @@ public abstract class ActivityController {
 	public void setTime(long hour, long min, long sec, long centisec) {
 		NumberFormat df = NumberFormat.getInstance();
 		df.setMinimumIntegerDigits(2);
-		leftTimeString = String.valueOf(df.format(hour));
+		
 		midTimeString = String.valueOf(df.format(min));
 		rightTimeString = String.valueOf(df.format(sec));
 		df.setMinimumIntegerDigits(1);
+		leftTimeString = String.valueOf(df.format(hour));
 		centisecTimeString = String.valueOf(df.format(centisec));
 		this.setTime(leftTimeString, midTimeString, rightTimeString, centisecTimeString);
 	}

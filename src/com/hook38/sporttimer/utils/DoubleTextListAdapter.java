@@ -45,7 +45,7 @@ public class DoubleTextListAdapter extends BaseAdapter {
         }
 		
 		TextView count = (TextView) convertView.findViewById(R.id.list_view_count);
-		count.setText(this.getPositionCount(position));
+		count.setText(this.getPositionCount(position)+".");
 		
 		TextView text = (TextView) convertView.findViewById(R.id.list_view_text);
 		text.setText(list.get(position)+".");

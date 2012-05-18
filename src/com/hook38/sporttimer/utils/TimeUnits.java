@@ -1,5 +1,6 @@
 package com.hook38.sporttimer.utils;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 /**
  * This class holds the time units. The default time units should contain
@@ -63,11 +64,14 @@ public class TimeUnits {
 	public String toString() {
 		//time unit in format num:num:num
 		String string = "";
+		NumberFormat df = NumberFormat.getInstance();
+		df.setMinimumIntegerDigits(2);
 		for(int i=0; i<units.size(); i++) {			
 			if(i!=0){
 				string +=":";
-			}
-			string+=units.get(i);
+			}			
+			String unitString = String.valueOf(df.format(units.get(i)));
+			string+=unitString;
 		}
 		return string;
 	}

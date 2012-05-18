@@ -65,9 +65,11 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
     		startActivity(new Intent(this, CountDownTimerActivity.class));
     		finish();
     		return true;
+    	/*
     	case R.id.setting:
     		startActivity(new Intent(this, SettingActivity.class));
-    		return true;  
+    		return true;
+    		*/  
     	case R.id.exit:
     		finish();
     		return true;

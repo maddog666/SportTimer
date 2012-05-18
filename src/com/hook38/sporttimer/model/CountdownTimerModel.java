@@ -3,17 +3,14 @@ package com.hook38.sporttimer.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.hook38.sporttimer.utils.TimeUnits;
-import com.hook38.sporttimer.utils.countdowntimer.RoutineList;
 
 public class CountdownTimerModel {
 	private ArrayList<TimeUnits> list = new ArrayList<TimeUnits>();
 	
 	public void add(TimeUnits units) {
-		list.add(0, units);
+		list.add(units);
 	}
 	
 	public TimeUnits get(int posi) 
@@ -63,5 +60,6 @@ public class CountdownTimerModel {
 		}
 		return tempList;
 	}
+
 	
 }

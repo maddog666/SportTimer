@@ -2,6 +2,7 @@ package com.hook38.sporttimer.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -52,10 +53,16 @@ public class CountdownTimerStoreController {
 	public void storeTimerModel(CountdownTimerModel model, String routineName) {	
 		long routineId = this.storeRoutine(routineName);
 		this.deleteTimeUnitsByRoutineId(routineId);
+		/*
 		for(int i=model.size()-1; i>=0; i--) {
 			this.storeTimeUnit(model.get(i).toString(), i, routineId);
 			
-		}		
+		}
+		*/
+		
+		for(int i=0; i<model.size(); i++){
+			this.storeTimeUnit(model.get(i).toString(), i, routineId);
+		}
 	}
 	
 	private void deleteTimeUnitsByRoutineId(long id) {
@@ -137,8 +144,8 @@ public class CountdownTimerStoreController {
 		return unitDao.queryBuilder()
 				.where(com.hook38.sporttimer.model.sql
 						.TimeUnitSQLDao.Properties.RoutineId
-						.eq(routineId))
-				.orderDesc(com.hook38.sporttimer.model.sql
+						.eq(routineId))						
+				.orderAsc(com.hook38.sporttimer.model.sql
 						.TimeUnitSQLDao.Properties.Orders)
 				.list();
 	}

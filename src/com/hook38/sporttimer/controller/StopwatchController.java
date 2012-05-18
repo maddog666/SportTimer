@@ -32,8 +32,8 @@ public class StopwatchController extends ActivityController {
 		}
 	}
 	
-	public StopwatchController(/*Context context*/Activity activity, ClockView clockView, ListView listview) {
-		super(/*context*/activity, clockView, listview);
+	public StopwatchController(Activity activity, ClockView clockView, ListView listview) {
+		super(activity, clockView, listview);
 		// TODO Auto-generated constructor stub
 	}
 	

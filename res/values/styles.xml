@@ -11,6 +11,11 @@
 	    <item name="android:textSize">40sp</item>	    	
 	</style>   
 	
+	<style name="interactive_textview_title" parent="@android:style/TextAppearance">
+	    <item name="android:textSize">20sp</item>
+	    <item name="android:textColor">@color/honeydew4</item>
+	</style>
+	
 	<style name="List_text" parent="@android:style/TextAppearance">
 		<item name="android:textColor">@color/seashell4</item>  
 		<item name="android:textSize">15sp</item>
