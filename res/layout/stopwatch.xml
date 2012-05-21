@@ -11,7 +11,8 @@
     	android:layout_height="0sp"
     	android:layout_width="fill_parent"
     	android:orientation="horizontal"
-    	android:padding="5dp">    
+    	android:padding="5dp"
+    	android:background="@color/cornsilk3">    
 		<fragment android:name="com.hook38.sporttimer.view.ClockView"
 	    	android:id="@+id/clock_fragment"
 	    	android:layout_height="fill_parent"
@@ -21,7 +22,8 @@
 	    android:layout_weight="1"
     	android:layout_height="0sp"
     	android:layout_width="fill_parent"
-    	android:orientation="horizontal">    	    	
+    	android:orientation="horizontal"
+    	android:padding="2dp">    	    	
 		    <Button
 		        android:id="@+id/start_button"
 		        android:layout_width="0sp"

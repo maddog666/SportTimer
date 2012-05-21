@@ -2,15 +2,15 @@
 <resources>
 
     <string name="stopwatch_name">Stopwatch</string>
-    <string name="countdown_clock_name">Routine Timer</string>
+    <string name="countdown_clock_name">Routines Timer</string>
     <string name="app_name">SportTimer</string>
 	<string name="settings_label">Settings</string>
 	<string name="stopwatch_label">StopWatch</string>
-	<string name="timer_label">RoutineTimer</string>
+	<string name="timer_label">RoutinesTimer</string>
 	<string name="setting_label">Setting</string>
 	<string name="exit_label">Exit</string>
-	<string name="countdown_repeat">Routine Timer Repeat</string>
-	<string name="countdown_repeat_summary">Routine Timer Repeat</string>
+	<string name="countdown_repeat">Routines Timer Repeat</string>
+	<string name="countdown_repeat_summary">Routines Timer Repeat</string>
 	<string name="time_input_title">Enter your time</string>
 	<string name="text_input_title">Enter a routine name</string>
 	<string name="enter_button">Enter</string>
@@ -34,8 +34,8 @@
 	<string name="stopwatch_help_reset_title">@string/reset</string>
 	<string name="stopwatch_help_reset_text">Reset the timer and clear recorded laps.</string>
 	
-	<string name="countdown_timer_help_title">Routine Timer Guide</string>
-	<string name="countdown_timer_help_intro">Routine timer is designed for countdown routines. 
+	<string name="countdown_timer_help_title">Routines Timer Guide</string>
+	<string name="countdown_timer_help_intro">Routines timer is designed for countdown routines. 
 	    It can also be use as a simple countdown timer.</string>
 	<string name="countdown_timer_help_start_title">@string/start</string>
 	<string name="countdown_timer_help_start_text">Start the countdown.</string>
@@ -76,7 +76,7 @@
 	<string name="edit">Edit</string>
 	<string name="remove">Remove</string>
 	
-	<string name="text_input_hint">routine name</string>
+	<string name="text_input_hint">routines name</string>
 	
 	<string name="selected_routine_key">SelectedRoutine</string>
 	

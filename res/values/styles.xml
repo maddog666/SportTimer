@@ -26,7 +26,7 @@
 	</style>
 	
 	<style name="interactive_textview_title" parent="@android:style/TextAppearance">
-	    <item name="android:textSize">20sp</item>
+	    <item name="android:textSize">15sp</item>
 	    <item name="android:textColor">@color/saddlebrown</item>
 	</style>
 	
