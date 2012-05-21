@@ -2,11 +2,8 @@ package com.hook38.sporttimer.controller;
 import java.util.List;
 
 import android.app.Activity;
-
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.hook38.sporttimer.R;
@@ -143,7 +140,6 @@ public class CountdownTimerController extends ActivityController{
 				this.addRoutine(text);
 				//focus to the added routine
 				this.loadListView(text);
-				Log.d(TAG, "finished handle input");
 				break;
 			case(CountdownTimerController.TEXT_EDIT_CODE):
 				String originalText = data.getStringExtra("originaltext");
@@ -181,7 +177,6 @@ public class CountdownTimerController extends ActivityController{
 	}
 	
 	public void selectRoutine(String text) {
-		Log.d(TAG, "selectRoutine "+text);
 		((InteractiveListView)listView).selectSpinner(text);
 	}
 	
@@ -285,7 +280,7 @@ public class CountdownTimerController extends ActivityController{
 			long hours = millis/(1000 * 60 * 60);
 			long mins = millis/(1000 * 60) % 60;
 			long secs = ((millis/1000) % 60);
-			long centisecs = (millis/10) % 10;
+			long centisecs = (millis/100) % 10;
 			//long centisecs = (countdownTime/10) % 100;
 			setTime(hours, mins, secs, centisecs);
 			handler.removeCallbacks(this);

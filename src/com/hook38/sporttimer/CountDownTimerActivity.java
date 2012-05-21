@@ -49,21 +49,18 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         											listview_fragment);
         
         controller.initiate();
-        
-        
+    
         Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         Button pauseButton = (Button)findViewById(R.id.pause_button);
         pauseButton.setOnClickListener(this);
         Button stopButton = (Button)findViewById(R.id.stop_button);
         stopButton.setOnClickListener(this);
-
         
         this.initiate(savedInstanceState);
 	}
 	
 	private void initiate(Bundle savedInstanceState) {
-		Log.d(TAG, "initiate");
 		if(savedInstanceState != null) {
 			this.getController().selectRoutine(savedInstanceState.getString("selectedRoutine"));
 		}
@@ -72,7 +69,6 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	@Override
 	public void onResume(){
 		super.onResume();
-		Log.d(TAG, "onResume");
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		String selectedRoutine =
 				settings.getString(getString(R.string.selected_routine_key), null);
@@ -132,7 +128,10 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
     	case R.id.setting:
     		startActivity(new Intent(this, SettingActivity.class));
     		return true;
-    		*/  
+    		*/    		
+    	case R.id.help:
+    		startActivity(new Intent(this, CountdownTimerHelpActivity.class));
+    		return true;
     	case R.id.exit:
     		finish();
     		return true;
@@ -153,12 +152,6 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 			getController().stopButtonClicked();
 			break;
 		}
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		controller.close();
 	}
 	
 	public CountdownTimerController getController() {

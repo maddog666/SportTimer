@@ -4,8 +4,13 @@
 	<color name="white">#FFFFFF</color>
 	<color name="black">#000000</color>
 	<color name="ghost_white">#f8f8ff</color>
+	<color name="bisque4">#8b7d6b</color>
+	<color name="peachpuff4">#8b7765</color>
 	<color name="cornsilk3">#cdc8b1</color>
+	<color name="cornsilk4">#8b8878</color>
+	<color name="seashell">#fff5ee</color>
 	<color name="seashell4">#8b8682</color>
 	<color name="transparent">#0000</color>
 	<color name="honeydew4">#838b83</color>
+	<color name="saddlebrown">#8b4513</color>
 </resources>

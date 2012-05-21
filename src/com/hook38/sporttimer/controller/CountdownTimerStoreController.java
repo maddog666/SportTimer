@@ -53,13 +53,7 @@ public class CountdownTimerStoreController {
 	public void storeTimerModel(CountdownTimerModel model, String routineName) {	
 		long routineId = this.storeRoutine(routineName);
 		this.deleteTimeUnitsByRoutineId(routineId);
-		/*
-		for(int i=model.size()-1; i>=0; i--) {
-			this.storeTimeUnit(model.get(i).toString(), i, routineId);
-			
-		}
-		*/
-		
+
 		for(int i=0; i<model.size(); i++){
 			this.storeTimeUnit(model.get(i).toString(), i, routineId);
 		}
@@ -82,7 +76,6 @@ public class CountdownTimerStoreController {
 	public void deleteRoutine(String routineName) {
 		RoutineSQL routine = this.retrieveStoredRoutine(routineName);
 		this.deleteTimeUnitsByRoutineId(routine.getId());
-		//routineDao.delete(routine);
 		daoSession.delete(routine);
 	}
 	
@@ -93,7 +86,6 @@ public class CountdownTimerStoreController {
 		if(storedRoutine != null) {
 			List<TimeUnitSQL> storedUnits = this.retrieveStoredTimeUnits(storedRoutine.getId());
 			for(TimeUnitSQL unit: storedUnits) {
-				Log.d("CountdownTimerStoreController", "retrieveTimerModel: "+unit.getTimeunit());
 				model.add(new TimeUnits(unit.getTimeunit()));
 			}
 		}

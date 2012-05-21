@@ -117,7 +117,7 @@ public class StopwatchController extends ActivityController {
 			long hours = spentTime/(1000 * 60 * 60);
 			long mins = spentTime/(1000 * 60) % 60;
 			long secs = (spentTime/1000) % 60;
-			long centisecs = (spentTime/10) % 10;
+			long centisecs = (spentTime/100) % 10;
 			setTime(hours, mins, secs, centisecs);
 			handler.removeCallbacks(this);
 			handler.postDelayed(this, 40);

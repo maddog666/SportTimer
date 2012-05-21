@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<style name="Title" parent="@android:style/TextAppearance">	    
-	    <item name="android:layout_gravity">center</item>
 	    <item name="android:layout_width">fill_parent</item>
 	    <item name="android:layout_height">wrap_content</item>
 	    <item name="android:textColor">@color/black</item>	
 	</style>
 	
 	<style name="Title.Large" parent="@android:style/TextAppearance">	    
-	    <item name="android:textSize">40sp</item>	    	
+	    <item name="android:textSize">17sp</item>
+	    <item name="android:paddingTop">6dp</item>
+	    <item name="android:textColor">@color/saddlebrown</item>	    	
 	</style>   
+	
+	<style name="Title.Medium" parent="@android:style/TextAppearance">	   
+	    <item name="android:gravity">center_vertical</item> 
+	    <item name="android:textSize">15sp</item>
+	    <item name="android:padding">3dp</item>	    	
+	    <item name="android:textColor">@color/bisque4</item>
+	</style>
+	
+	<style name="Title.Small" parent="@android:style/TextAppearance">	    
+	    <item name="android:textSize">13sp</item>
+	    <item name="android:padding">2dp</item>
+	    <item name="android:textColor">@color/cornsilk4</item>	    	
+	</style>
 	
 	<style name="interactive_textview_title" parent="@android:style/TextAppearance">
 	    <item name="android:textSize">20sp</item>
-	    <item name="android:textColor">@color/honeydew4</item>
+	    <item name="android:textColor">@color/saddlebrown</item>
 	</style>
 	
 	<style name="List_text" parent="@android:style/TextAppearance">

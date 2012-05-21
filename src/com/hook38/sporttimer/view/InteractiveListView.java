@@ -90,7 +90,6 @@ public class InteractiveListView extends ListView {
 	 */
 	public void selectSpinner(String name) {
 		int i = adapter.getPosition(name);
-		Log.d(TAG, "selectSpinner: "+i);
 		routine_spinner.setSelection(i);
 	}
 	
