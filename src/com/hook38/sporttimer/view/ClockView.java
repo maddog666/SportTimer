@@ -36,7 +36,7 @@ public class ClockView extends Fragment {
 	private Drawable nine;
 	private Drawable zero;
 	
-	private static String DIGIT_FILE_NAME = "digit";
+	private static String DIGIT_FILE_NAME = "ic_menu_digit";
 	private static String TAG = "ClockView";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

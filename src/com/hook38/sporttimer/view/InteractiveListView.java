@@ -7,8 +7,10 @@ import com.hook38.sporttimer.R;
 import com.hook38.sporttimer.utils.DoubleTextListAdapter;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,14 @@ public class InteractiveListView extends ListView {
 	private String TAG = "InteractiveListView";
 	ArrayAdapter<String> adapter;
 	Spinner routine_spinner;
+	Vibrator vibrator;
 	
+	private Vibrator getVibrator() {
+		if(this.vibrator == null) {
+			this.vibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+		}
+		return this.vibrator;
+	}
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
@@ -52,6 +61,8 @@ public class InteractiveListView extends ListView {
 
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			getVibrator().vibrate(
+					getResources().getInteger(R.integer.vibrate_length));
 			switch(v.getId()){
 			case R.id.add_time_button:
 				((CountDownTimerActivity)getActivity())
@@ -92,6 +103,7 @@ public class InteractiveListView extends ListView {
 		int i = adapter.getPosition(name);
 		routine_spinner.setSelection(i);
 	}
+	
 	
 	/**
 	 * Return the selected spinner

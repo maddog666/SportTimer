@@ -24,7 +24,7 @@ public class TimeInputActivity extends Activity implements OnClickListener,
 	/**
 	 * The name prefix of the digit graphic files.
 	 */
-	private static String DIGIT_FILE_NAME = "digit";
+	private static String DIGIT_FILE_NAME = "ic_menu_digit";
 	
 	/**
 	 * The increment speed of timer on long press.
@@ -143,52 +143,80 @@ public class TimeInputActivity extends Activity implements OnClickListener,
 		
 	}
 	
-	private void increaseHour() {
+	private boolean increaseHour() {
 		if(hour < HOUR_MAX) {
 			hour++;
 			this.setHourImage();
+			return true;
 		}
+		return false;
 	}
 	
-	private void decreaseHour() {
+	private boolean decreaseHour() {
 		if(hour > HOUR_MIN) {
 			hour--;		
 			this.setHourImage();
+			return true;
 		}
+		return false;
 	}
 	
-	private void increaseMin() {
+	private boolean increaseMin() {
 		if(min < MIN_MAX) {
-			min++;
-		} else {
-			min = MIN_MIN;
-			this.increaseHour();
+			min++;			
+		} else {			
+			if(this.increaseHour()){
+				min = MIN_MIN;				
+			} else {
+				return false;
+			}
 		}
 		this.setMinImage();
+		return true;
+		
 	}
 	
-	private void decreaseMin() {
+	private boolean decreaseMin() {
 		if(min > MIN_MIN) {
-			min--;
-			this.setMinImage();
+			min--;			
+		} else {
+			if(this.decreaseHour()) {
+				min = MIN_MAX;
+			} else{
+				return false;
+			}
 		}
+		this.setMinImage();
+		return true;
 	}
 	
-	private void increaseSec() {
+	private boolean increaseSec() {
 		if(sec < SEC_MAX) {
-			sec++;
+			sec++;			
 		} else {
-			this.increaseMin();
-			sec = SEC_MIN;
+			if(this.increaseMin()){
+				sec = SEC_MIN;				
+			}else{
+				return false;
+			}
 		}
 		this.setSecImage();
+		return true;
+		
 	}
 	
-	private void decreaseSec() {
+	private boolean decreaseSec() {
 		if(sec > SEC_MIN) {
-			sec--;
-			this.setSecImage();
+			sec--;			
+		} else{
+			if(this.decreaseMin()) {
+				sec = SEC_MAX;
+			}else{
+				return false;
+			}
 		}
+		this.setSecImage();
+		return true;
 	}
 	
 	

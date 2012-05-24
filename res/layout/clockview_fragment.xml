@@ -18,7 +18,7 @@
 	            android:id="@+id/hour_clock_imageview"
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/digit0"/>         
+	            android:src="@drawable/ic_menu_digit0"/>         
 	            
 	    </LinearLayout>
 	    <LinearLayout
@@ -29,7 +29,7 @@
 	        <ImageView 
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/seperator"/>  
+	            android:src="@drawable/ic_menu_seperator"/>  
 	    </LinearLayout>
 	    <LinearLayout
 	        android:layout_height="fill_parent"
@@ -42,13 +42,13 @@
 	            android:layout_weight="1"
 	            android:layout_width="0dp"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/digit0"/>
+	            android:src="@drawable/ic_menu_digit0"/>
 	        <ImageView 
 	            android:id="@+id/min_right_clock_imageview"
 	            android:layout_weight="1"
 	            android:layout_width="0dp"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/digit0"/>     
+	            android:src="@drawable/ic_menu_digit0"/>     
 	            
 	    </LinearLayout>
 	    
@@ -60,7 +60,7 @@
 	        <ImageView 
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/seperator"/>  
+	            android:src="@drawable/ic_menu_seperator"/>  
 	    </LinearLayout>
 	    
 	    <LinearLayout
@@ -74,13 +74,13 @@
 	            android:layout_width="0dp"
 	            android:layout_height="fill_parent"
 	            android:layout_weight="1"
-	            android:src="@drawable/digit0"/>
+	            android:src="@drawable/ic_menu_digit0"/>
 	        <ImageView 
 	            android:id="@+id/sec_right_clock_imageview"
 	            android:layout_weight="1"
 	            android:layout_width="0dp"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/digit0"/>
+	            android:src="@drawable/ic_menu_digit0"/>
 	    </LinearLayout>
 	    
 	    <LinearLayout
@@ -91,7 +91,7 @@
 	        <ImageView 
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/seperator"/>  
+	            android:src="@drawable/ic_menu_seperator"/>  
 	    </LinearLayout>
 	    
 	    <LinearLayout
@@ -104,6 +104,6 @@
 	            android:id="@+id/centisec_clock_imageview"
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
-	            android:src="@drawable/digit0"/>
+	            android:src="@drawable/ic_menu_digit0"/>
 	    </LinearLayout>    
 </LinearLayout>

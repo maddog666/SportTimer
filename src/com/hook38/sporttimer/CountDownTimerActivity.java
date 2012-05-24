@@ -5,10 +5,12 @@ import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.InteractiveListView;
 import com.hook38.sporttimer.view.ListView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +32,7 @@ import android.widget.Toast;
 public class CountDownTimerActivity extends SportTimerActivity implements OnClickListener {
 	private String TAG = "CountDownTimerActivity";
 	public static final String PREFS_NAME = "MyPrefsFile";
-	
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,7 +143,8 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-		switch(arg0.getId()) {
+		this.getVibrator().vibrate(getResources().getInteger(R.integer.vibrate_length));
+		switch(arg0.getId()) {		
 		case R.id.start_button:
 			getController().startButtonClicked();
 			break;
@@ -157,6 +160,8 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	public CountdownTimerController getController() {
 		return (CountdownTimerController)this.controller;
 	}
+	
+
 	
 
 }

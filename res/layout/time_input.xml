@@ -29,25 +29,27 @@
 	        	    android:id="@+id/time_input_hour_plus_image"
 	        	    android:layout_width="match_parent"
 	        	    android:layout_height="match_parent"
-	        	    android:src="@drawable/up_small" />
+	        	    android:src="@drawable/ic_menu_up" />
 			</LinearLayout>
 			
         	<LinearLayout
-        	   	style="@style/TimeInputDigitsImageLayout">
+        	   	style="@style/TimeInputDigitsImageLayout"
+        	   	android:gravity="center">
         	<ImageView
         	    android:id="@+id/time_input_hour_image"
         	    android:layout_width="wrap_content"
         	    android:layout_height="wrap_content"
-        	    android:src="@drawable/digit0" />
+        	    android:src="@drawable/ic_menu_digit0" />
         	</LinearLayout>
 
         	<LinearLayout
-        	   	style="@style/TimeInputModifierImageLayout">
+        	   	style="@style/TimeInputModifierImageLayout"
+        	   	>
         	<ImageView
             	android:id="@+id/time_input_hour_minus_image"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
-            	android:src="@drawable/down_small"/>
+            	android:src="@drawable/ic_menu_down"/>
             </LinearLayout>  
 	        
 	    </LinearLayout>
@@ -73,7 +75,7 @@
 	            android:id="@+id/time_input_min_plus_image"
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent"
-	            android:src="@drawable/up_small" />
+	            android:src="@drawable/ic_menu_up" />
 	        </LinearLayout>
 
 	        <LinearLayout
@@ -83,13 +85,13 @@
 	            	android:layout_width="0dp"
 	            	android:layout_weight="1"
 	            	android:layout_height="wrap_content"
-	            	android:src="@drawable/digit0" android:layout_gravity="top"/>
+	            	android:src="@drawable/ic_menu_digit0" android:layout_gravity="top"/>
 	        	<ImageView
 	            	android:id="@+id/time_input_right_min_image"
 	            	android:layout_weight="1"
 	            	android:layout_width="0dp"
 	            	android:layout_height="wrap_content"
-	            	android:src="@drawable/digit0"/>
+	            	android:src="@drawable/ic_menu_digit0"/>
 			</LinearLayout>
 			
 	        <LinearLayout
@@ -98,7 +100,7 @@
             	android:id="@+id/time_input_min_minus_image"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
-            	android:src="@drawable/down_small"/>
+            	android:src="@drawable/ic_menu_down"/>
         	</LinearLayout>
 
 	    </LinearLayout>
@@ -124,7 +126,7 @@
 	            android:id="@+id/time_input_sec_plus_image"
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent"
-	            android:src="@drawable/up_small" />
+	            android:src="@drawable/ic_menu_up" />
 			</LinearLayout>
 			
 	        <LinearLayout
@@ -134,13 +136,13 @@
 	            	android:layout_weight="1"
 	            	android:layout_width="0dp"
 	            	android:layout_height="wrap_content"
-	            	android:src="@drawable/digit0"/>
+	            	android:src="@drawable/ic_menu_digit0"/>
 	        	<ImageView
 	            	android:id="@+id/time_input_right_sec_image"
 	            	android:layout_width="0dp"
 	            	android:layout_weight="1"
 	            	android:layout_height="wrap_content"
-	            	android:src="@drawable/digit0"/>
+	            	android:src="@drawable/ic_menu_digit0"/>
 			</LinearLayout>
 			
 	        <LinearLayout
@@ -149,7 +151,7 @@
             	android:id="@+id/time_input_sec_minus_image"
             	android:layout_width="match_parent"
             	android:layout_height="match_parent"
-            	android:src="@drawable/down_small"/>
+            	android:src="@drawable/ic_menu_down"/>
         	</LinearLayout>
 
 	    </LinearLayout>

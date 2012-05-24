@@ -82,6 +82,7 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
     
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
+		this.getVibrator().vibrate(getResources().getInteger(R.integer.vibrate_length));
 		switch (view.getId()) {
 		case R.id.start_button:
 			getController().startButtonClicked();
