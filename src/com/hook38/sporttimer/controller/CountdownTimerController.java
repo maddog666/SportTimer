@@ -134,18 +134,19 @@ public class CountdownTimerController extends ActivityController{
 				Toast.makeText(this.getActivity().getApplicationContext(), 
 						this.getActivity().getString(R.string.no_text_warning), 
 						Toast.LENGTH_SHORT).show();
-			}
-			switch(requestCode) {
-			case(CountdownTimerController.TEXT_ADD_CODE):
-				this.addRoutine(text);
-				//focus to the added routine
-				this.loadListView(text);
-				break;
-			case(CountdownTimerController.TEXT_EDIT_CODE):
-				String originalText = data.getStringExtra("originaltext");
-				this.editRoutine(originalText, text);
-				this.loadListView(text);
-				break;
+			} else{
+				switch(requestCode) {
+				case(CountdownTimerController.TEXT_ADD_CODE):
+					this.addRoutine(text);
+					//focus to the added routine
+					this.loadListView(text);
+					break;
+				case(CountdownTimerController.TEXT_EDIT_CODE):
+					String originalText = data.getStringExtra("originaltext");
+					this.editRoutine(originalText, text);
+					this.loadListView(text);
+					break;
+				}
 			}
 		}
 			

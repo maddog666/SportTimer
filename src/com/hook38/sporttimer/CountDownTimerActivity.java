@@ -1,25 +1,20 @@
 package com.hook38.sporttimer;
 
+import com.google.ads.AdView;
 import com.hook38.sporttimer.controller.CountdownTimerController;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.InteractiveListView;
-import com.hook38.sporttimer.view.ListView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Vibrator;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 /**
  * This is the main activity class for the countdown clock,
@@ -51,6 +46,7 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         											listview_fragment);
         
         controller.initiate();
+        //this.initiateAdView();
     
         Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
@@ -94,9 +90,9 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 	}
 	
 	@Override 
-	public void onStop() {
-		super.onStop();
+	public void onStop() {		
 		controller.close();
+		super.onStop();
 	}
 	
 	@Override
@@ -161,7 +157,9 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		return (CountdownTimerController)this.controller;
 	}
 	
-
+	protected AdView getAdView() {
+		return (AdView)this.findViewById(R.id.countdowntimer_adview);
+	}
 	
 
 }

@@ -3,10 +3,13 @@ package com.hook38.sporttimer;
 import java.text.NumberFormat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -20,6 +23,17 @@ public class TimeInputActivity extends Activity implements OnClickListener,
 	private int hour, min, sec;
 	private ImageView hourImage, minLeftImage, minRightImage, secLeftImage,
 		secRightImage;
+	
+	Vibrator vibrator;
+	private static String TAG = "TimeInputActivity"; 
+	
+	private Vibrator getVibrator() {
+		Log.d(TAG, "get Vibrator");
+		if(this.vibrator == null) {
+			this.vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+		}
+		return this.vibrator;
+	}
 
 	/**
 	 * The name prefix of the digit graphic files.
@@ -112,6 +126,8 @@ public class TimeInputActivity extends Activity implements OnClickListener,
 
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+
+		
 		switch(v.getId()){
 		case(R.id.time_input_button):
 			Intent intent=new Intent();
@@ -269,6 +285,9 @@ public class TimeInputActivity extends Activity implements OnClickListener,
 
 	public boolean onDown(MotionEvent e) {
 		// TODO Auto-generated method stub
+		getVibrator().vibrate(
+				getResources().getInteger(R.integer.vibrate_length));
+		
 		switch(touchItem.getId()){
 		case(R.id.time_input_hour_plus_image):
 			this.increaseHour();

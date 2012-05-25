@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:id="@+id/countdowntimer_mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ghost_white"
-    android:orientation="vertical" 
-    android:padding="5dp">
+    android:orientation="vertical" >
+    	
     <LinearLayout 
 	    android:layout_weight="3"
     	android:layout_height="0sp"
@@ -58,5 +60,13 @@
 	    android:layout_height="fill_parent"
 	    android:layout_width="fill_parent" />
 	</LinearLayout>
+	<com.google.ads.AdView
+	    android:id="@+id/countdowntimer_adview"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    ads:adUnitId="@string/adview_publisher_id"
+	    ads:adSize="SMART_BANNER"
+	    ads:testDevices="TEST_EMULATOR, 830EE031A875C3CE8E266182E91BBDB2"
+	    ads:loadAdOnCreate="true"/>
 
 </LinearLayout>

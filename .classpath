@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="/Users/williamhu/Documents/Developer/Android/android-sdk/extras/android/support/v4/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="libs/greenDAO.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/williamhu/Documents/Developer/Android/GoogleAdMobAdsSdkAndroid-6.0.1/GoogleAdMobAdsSdk-6.0.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

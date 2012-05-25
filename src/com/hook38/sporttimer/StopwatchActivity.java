@@ -1,12 +1,13 @@
 package com.hook38.sporttimer;
 
+import com.google.ads.AdView;
 import com.hook38.sporttimer.controller.StopwatchController;
 import com.hook38.sporttimer.view.ClockView;
 import com.hook38.sporttimer.view.ListView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import android.widget.Button;
  *
  */
 public class StopwatchActivity extends SportTimerActivity implements OnClickListener {						
-
+	private static String TAG = "StopwatchActivity";
 	private Menu menu;
 	
 	
@@ -36,6 +37,7 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
         		(ListView) getSupportFragmentManager().findFragmentById(R.id.listview_fragment);
         
         controller = new StopwatchController(/*getBaseContext()*/this, clockview_fragment, listview_fragment);
+        this.configAdView();
         Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         Button pauseButton = (Button)findViewById(R.id.pause_button);
@@ -101,12 +103,16 @@ public class StopwatchActivity extends SportTimerActivity implements OnClickList
 	
 	
 	@Override
-	public void onStop() {
-		super.onStop();
+	public void onStop() {		
 		controller.close();
+		super.onStop();
 	}
 	public StopwatchController getController(){
 		return (StopwatchController)controller;
+	}
+	
+	protected AdView getAdView() {
+		return (AdView)this.findViewById(R.id.stopwatch_adview);
 	}
 	
 }

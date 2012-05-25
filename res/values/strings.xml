@@ -82,4 +82,7 @@
 	
 	<!-- Text to speech -->
 	<string name="routine_finish_speech">Routine finished</string>
+	
+	<!-- AdView -->
+	<string name="adview_publisher_id">a14fbefb53eee98</string>
 </resources>
