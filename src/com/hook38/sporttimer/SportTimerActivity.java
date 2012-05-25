@@ -30,8 +30,9 @@ abstract public class SportTimerActivity extends FragmentActivity {
 		return this.vibrator;
 	}
 	
+	/*
+	 * This is for free version with advertisement
 	abstract protected AdView getAdView();
-	
 	
 	protected void configAdView() {
 		AdRequest request = new AdRequest();
@@ -77,5 +78,6 @@ abstract public class SportTimerActivity extends FragmentActivity {
 		}
 		
 	};
+	*/
 	
 }

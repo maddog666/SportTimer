@@ -62,6 +62,7 @@
 	    android:layout_height="fill_parent"
 	    android:layout_width="fill_parent" />
 	</LinearLayout>
+	<!-- 
 	<com.google.ads.AdView
 	    android:id="@+id/stopwatch_adview"
 	    android:layout_width="fill_parent"
@@ -70,5 +71,5 @@
 	    ads:adSize="SMART_BANNER"
 	    ads:testDevices="TEST_EMULATOR, 830EE031A875C3CE8E266182E91BBDB2"
 	    ads:loadAdOnCreate="true"/>
-	
+	 -->
 </LinearLayout>

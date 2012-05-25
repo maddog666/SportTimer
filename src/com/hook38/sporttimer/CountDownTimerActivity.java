@@ -46,8 +46,8 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
         											listview_fragment);
         
         controller.initiate();
-        //this.initiateAdView();
-    
+        //Enable this for free version with advertisement
+        //this.configAdView();
         Button startButton = (Button)findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
         Button pauseButton = (Button)findViewById(R.id.pause_button);
@@ -157,9 +157,12 @@ public class CountDownTimerActivity extends SportTimerActivity implements OnClic
 		return (CountdownTimerController)this.controller;
 	}
 	
+	/*
+	 * this is for free version with advertisement
 	protected AdView getAdView() {
 		return (AdView)this.findViewById(R.id.countdowntimer_adview);
 	}
+	*/
 	
 
 }
